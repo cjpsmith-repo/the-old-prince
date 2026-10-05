@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Old Prince 1871 — Bidding Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#DFE4DE; --card:#EAEEE8; --ink:#16211C; --dim:#5A6B60;
+  --rule:#A8B3AB; --brass:#9A6E1E; --flood:#2E6E6B; --ebb:#7D3B54;
+  --display:"Bitter",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+     font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px 96px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--brass);margin:0 0 10px}
+.masthead{padding:60px 0 24px;border-bottom:2px solid var(--ink)}
+.masthead h1{font-size:clamp(32px,5.4vw,54px);line-height:1.04}
+.masthead p{max-width:66ch;color:var(--dim);margin:18px 0 0}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:28px;border-top:1px solid var(--rule);
+       font-family:var(--mono);font-size:12px}
+.fact{flex:1 1 120px;padding:12px 16px 12px 0;border-right:1px solid var(--rule)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-size:21px;font-weight:500;letter-spacing:-.02em}
+.fact span{color:var(--dim);text-transform:uppercase;letter-spacing:.1em;font-size:10px}
+.toggle{display:flex;gap:8px;margin:26px 0 0;align-items:center}
+.toggle button{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 18px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;
+  border-radius:0;transition:background .15s,color .15s}
+.toggle button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.toggle button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.toggle .fairnote{font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:8px}
+
+/* plain-language "how to read" band */
+.reading{margin-top:22px;background:var(--card);border:1px solid var(--rule);padding:16px 20px;
+         font-size:14px;color:var(--ink);max-width:none}
+.reading b{font-weight:600}
+.reading .k{font-family:var(--mono);font-size:12px;color:var(--brass);letter-spacing:.04em}
+
+section{padding-top:60px}
+section > h2{font-size:clamp(22px,3.4vw,30px);margin-bottom:6px}
+.lede{color:var(--dim);max-width:68ch;margin:10px 0 24px}
+.note{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:16px;max-width:76ch;line-height:1.7}
+.strip{width:100%;display:block}
+.rowlabel{font-family:var(--body);font-size:13.5px;fill:var(--ink)}
+.rowmeta{font-family:var(--mono);font-size:11px;fill:var(--dim)}
+.axis{font-family:var(--mono);font-size:10.5px;fill:var(--dim);letter-spacing:.08em}
+
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;margin-top:8px}
+thead th{text-align:right;font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);border-bottom:1px solid var(--ink);padding:0 0 8px 14px;cursor:pointer;white-space:nowrap}
+thead th:first-child{text-align:left;padding-left:0}
+thead th[aria-sort]{color:var(--brass)}
+tbody td{text-align:right;padding:8px 0 8px 14px;border-bottom:1px solid var(--rule)}
+tbody td:first-child{text-align:left;padding-left:0;font-family:var(--body);font-size:14px}
+tbody tr:hover{background:var(--card)}
+tbody tr.dim td{color:var(--dim)}
+.pos{color:var(--flood)} .neg{color:var(--ebb)}
+.carry{font-family:var(--body);font-size:12px;color:var(--dim)}
+
+.finding{border-left:3px solid var(--brass);padding:2px 0 2px 20px;margin:24px 0;max-width:74ch}
+.finding h3{font-size:17px;margin-bottom:6px}
+.finding p{margin:0;color:var(--dim);font-size:15px}
+
+/* heatmap grids (coordination + timing) */
+.grid{margin-top:12px;overflow-x:auto}
+.grid table{font-size:12px;min-width:720px;margin-top:0}
+.grid th{cursor:default}
+.grid th.col{text-align:center;padding:0 4px 8px;font-size:10px;line-height:1.2;color:var(--dim);
+  font-family:var(--body);font-weight:500;border-bottom:1px solid var(--ink)}
+.grid td.head{text-align:left;font-family:var(--body);font-size:13px;padding-right:12px;white-space:nowrap;
+  border-bottom:1px solid var(--rule)}
+.grid td.head em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--dim);display:block}
+.grid td.cell{text-align:center;padding:0;border-bottom:1px solid var(--paper)}
+.grid td.cell div{padding:8px 4px;line-height:1.15}
+.grid td.cell b{display:block;font-weight:500;font-size:13px}
+.grid td.cell span{font-size:9.5px;opacity:.7}
+.grid td.diag div{outline:1.5px solid var(--ink);outline-offset:-2px}
+.grid td.over{border-bottom:1px solid var(--rule)}
+.grid td.over div{padding:8px 6px;font-family:var(--mono)}
+.grid td.over b{font-size:14px;font-weight:500}
+.legend{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
+        color:var(--dim);margin-top:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:24px;height:11px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;
+       background:var(--rule);border:1px solid var(--rule);margin-top:16px}
+.card{background:var(--card);padding:20px}
+.card h3{font-size:15px;margin-bottom:6px}
+.card .big{font-family:var(--mono);font-size:30px;letter-spacing:-.02em;display:block;margin:6px 0 2px}
+.card p{margin:0;font-size:13.5px;color:var(--dim);line-height:1.5}
+
+footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--rule);
+       font-family:var(--mono);font-size:11.5px;color:var(--dim);line-height:1.8}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:640px){.fact{border-right:0}}
+</style></head><body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">18xx.games · bidding companion</p>
+  <h1>What to pay for each private</h1>
+  <p>Every opening-auction lot that drew at least one bid and could be pinned to a player,
+     across every finished game on record. Use it as a price sheet: what a private usually
+     goes for, whether paying up is worth it, which privates pair well, and which railways
+     reward the player who starts them.</p>
+  <div class="facts" id="facts"></div>
+  <div class="toggle" role="group" aria-label="Player count">
+    <button id="b3" aria-pressed="true">3 players</button>
+    <button id="b4" aria-pressed="false">4 players</button>
+    <span class="fairnote" id="fairnote"></span>
+  </div>
+  <div class="reading">
+    <b>How to read the win figures.</b> Everything below is measured as a
+    <span class="k">win rate</span> — how often the player who bought a lot (or the pair, or
+    the company) went on to finish first. Compare it to the <span class="k">fair share</span>:
+    with equal seats, each player wins <span id="rdFair"></span> of the time by luck alone.
+    Above that line is good, below is bad. <b>Green beats fair share, red trails it.</b>
+  </div>
+</header>
+
+<section>
+  <p class="eyebrow">The price sheet</p>
+  <h2>What a private goes for</h2>
+  <p class="lede">Sorted by typical price. The <b>bar</b> spans the usual range (the middle 80% of
+     winning bids); the notch is the <b>median</b> — a fair anchor for what to bid — and the hollow
+     tick is <b>face value</b>. Anything to the right of the notch is you paying a premium.</p>
+  <div id="ladder"></div>
+  <table id="priceTable"><thead></thead><tbody></tbody></table>
+  <p class="note">Click a column to sort. <b>Typical</b> is the median winning bid; <b>range</b> is the
+     10th–90th percentile; <b>win rate</b> is how often the buyer finished first. PEIR mini-shares are
+     dimmed — they mostly go at face and rarely draw a real fight.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Is paying up worth it?</p>
+  <h2>Winners pay a hair less</h2>
+  <p class="lede">The gap between what eventual winners paid for a lot and what everyone else paid.
+     Bars point left when winners paid <b>less</b>. The hairline is the 95% confidence interval;
+     a bar whose hairline crosses zero can't be told apart from no effect. The honest read: discipline
+     is worth a couple of dollars a lot, not twenty — so anchor on the median and don't chase.</p>
+  <div id="delta"></div>
+  <p class="note" id="deltaNote"></p>
+</section>
+
+<section>
+  <p class="eyebrow">Does taking the lot help you win?</p>
+  <h2>Win rate by private</h2>
+  <p class="lede">How often the buyer of each private finished first, measured against the fair-share
+     line. This is the same question as the price sheet from the other side: not "what does it cost"
+     but "does owning it help." Most privates hug the line; a few lean.</p>
+  <div id="winbars"></div>
+</section>
+
+<section>
+  <p class="eyebrow">Private coordination</p>
+  <h2>Which privates pair well</h2>
+  <p class="lede">Each player leaves the auction holding a handful of privates. This asks whether
+     certain <b>combinations</b> win more than the privates would on their own. Rows and columns are
+     the named privates, ordered by their solo win rate. A cell is the win rate of players who left
+     the auction holding <b>both</b>; the outlined diagonal is the private on its own.</p>
+  <div class="grid" id="coord"></div>
+  <div class="legend">
+    <span>Held together, buyer finished</span>
+    <i style="background:var(--ebb)"></i><span>below fair share</span>
+    <i style="background:var(--card)"></i><span>at fair share</span>
+    <i style="background:var(--flood)"></i><span>above</span>
+    <span style="margin-left:auto">Cells need 25+ pairings; blanks are thinner than that.</span>
+  </div>
+  <div id="coordFind"></div>
+</section>
+
+<section>
+  <p class="eyebrow">Company coordination</p>
+  <h2>Which railway to start, and when</h2>
+  <p class="lede">For each of the seven PEIR railways, how often the player who <b>started</b> it —
+     the president who parred it, or bought its concession — went on to win. The big
+     <b>overall</b> column is the reliable signal; the smaller cells split that by <b>float order</b>,
+     meaning whether the company was the 1st, 2nd, 3rd… to open that game. Position 1 and 2 are always
+     the two railways seeded as the Mainline and Shortline at setup.</p>
+  <div class="grid" id="timing"></div>
+  <div class="legend">
+    <span>Starter finished</span>
+    <i style="background:var(--ebb)"></i><span>below fair share</span>
+    <i style="background:var(--card)"></i><span>at fair share</span>
+    <i style="background:var(--flood)"></i><span>above</span>
+    <span style="margin-left:auto">Cells need 15+ starts; blanks are thinner than that.</span>
+  </div>
+  <div id="startOrder" style="margin-top:34px"></div>
+  <div id="timingFind"></div>
+</section>
+
+<section>
+  <p class="eyebrow">For the curious · pooled across 3p and 4p</p>
+  <h2>The same price, a different railway</h2>
+  <p class="lede">Eight of the privates carry a share of whichever company is the Mainline or Shortline
+     that game — and which company that is gets drawn at random during setup. So the same private, at
+     the same price, can hand you a share of a strong railway or a weak one. This grid uses a
+     <b>neutral-0.500 finish score</b> instead of a win rate, because that scale is comparable across
+     3&nbsp;and&nbsp;4-player games and lets both pool together: <b>0.500 is an average finish, 1.000
+     is always first, 0.000 is always last.</b> The small figure is what the buyer paid.</p>
+  <div class="grid" id="railway"></div>
+  <div class="legend">
+    <span>Buyer's finish</span>
+    <i style="background:var(--ebb)"></i><span>worse (&lt;0.5)</span>
+    <i style="background:var(--card)"></i><span>0.500</span>
+    <i style="background:var(--flood)"></i><span>better</span>
+    <span style="margin-left:auto">Pooled, since each cell needs the sample. 15+ purchases per cell.</span>
+  </div>
+  <div id="railwayFind"></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<script>
+const DATA = {"meta":{"games":767,"p3":476,"p4":291,"from":"2025-07-26","to":"2026-07-25","attribLots":8452},"p3":{"nGames":476,"fair":33.3,"lots":[{"id":"ML","name":"Mainline Concession","face":160,"carries":"Mainline presidency (20%)","named":true,"n":404,"median":180.0,"mean":179.3,"p10":165,"p90":195,"lo":165,"hi":240,"sd":12.1,"winMean":178.4,"loseMean":179.8,"delta":-1.4,"deltaCi":2.5,"winPct":31.9,"score":0.494,"scoreCi":0.039,"unbid":4.5},{"id":"SL","name":"Short Line Concession","face":160,"carries":"Shortline presidency (20%)","named":true,"n":408,"median":175.0,"mean":175.7,"p10":165,"p90":190,"lo":165,"hi":220,"sd":10.2,"winMean":174.6,"loseMean":176.1,"delta":-1.5,"deltaCi":2.0,"winPct":30.1,"score":0.457,"scoreCi":0.04,"unbid":7.3},{"id":"UB","name":"Union Bank","face":120,"carries":"10% Mainline share","named":true,"n":417,"median":140,"mean":142.4,"p10":125,"p90":160,"lo":125,"hi":195,"sd":14.2,"winMean":141.0,"loseMean":143.3,"delta":-2.3,"deltaCi":2.7,"winPct":38.8,"score":0.532,"scoreCi":0.04,"unbid":4.1},{"id":"RF","name":"Railcar Ferry","face":120,"carries":"10% Mainline share","named":true,"n":365,"median":125,"mean":130.1,"p10":125,"p90":140,"lo":125,"hi":160,"sd":6.8,"winMean":129.4,"loseMean":130.4,"delta":-1.0,"deltaCi":1.5,"winPct":33.2,"score":0.504,"scoreCi":0.042,"unbid":14.7},{"id":"HSE","name":"Hunslet Steam Engine","face":110,"carries":"no share","named":true,"n":408,"median":120.0,"mean":125.3,"p10":115,"p90":140,"lo":115,"hi":190,"sd":12.2,"winMean":123.8,"loseMean":126.1,"delta":-2.3,"deltaCi":2.4,"winPct":35.5,"score":0.528,"scoreCi":0.039,"unbid":5.1},{"id":"RA","name":"Royal Agricultural Society","face":110,"carries":"10% Mainline share","named":true,"n":368,"median":117.5,"mean":120.1,"p10":115,"p90":130,"lo":115,"hi":150,"sd":6.7,"winMean":118.9,"loseMean":120.6,"delta":-1.7,"deltaCi":1.4,"winPct":29.6,"score":0.47,"scoreCi":0.041,"unbid":15.2},{"id":"SBC","name":"Schreiber & Burpee","face":100,"carries":"no share","named":true,"n":400,"median":110.0,"mean":114.2,"p10":105,"p90":130,"lo":105,"hi":155,"sd":10.2,"winMean":112.5,"loseMean":115.1,"delta":-2.6,"deltaCi":2.1,"winPct":35.0,"score":0.507,"scoreCi":0.041,"unbid":7.4},{"id":"SB","name":"Shipbuilding","face":90,"carries":"10% Shortline share","named":true,"n":384,"median":95.0,"mean":99.1,"p10":95,"p90":110,"lo":95,"hi":120,"sd":5.7,"winMean":98.9,"loseMean":99.1,"delta":-0.2,"deltaCi":1.3,"winPct":29.7,"score":0.458,"scoreCi":0.041,"unbid":12.5},{"id":"P1","name":"PEIR Souris-1","face":80,"carries":"own PEIR share","named":false,"n":197,"median":85,"mean":87.3,"p10":85,"p90":95,"lo":85,"hi":125,"sd":5.5,"winMean":86.8,"loseMean":87.5,"delta":-0.7,"deltaCi":1.5,"winPct":34.5,"score":0.485,"scoreCi":0.059,"unbid":33.0},{"id":"P2","name":"PEIR Alberton-2","face":80,"carries":"own PEIR share","named":false,"n":133,"median":85,"mean":86.4,"p10":85,"p90":90,"lo":85,"hi":115,"sd":3.8,"winMean":86.7,"loseMean":86.3,"delta":0.4,"deltaCi":1.4,"winPct":28.6,"score":0.459,"scoreCi":0.068,"unbid":50.9},{"id":"P3","name":"PEIR Mount Stewart-3","face":80,"carries":"own PEIR share","named":false,"n":144,"median":85.0,"mean":86.6,"p10":85,"p90":90,"lo":85,"hi":130,"sd":4.9,"winMean":86.1,"loseMean":86.8,"delta":-0.8,"deltaCi":1.3,"winPct":26.4,"score":0.469,"scoreCi":0.063,"unbid":49.5},{"id":"P4","name":"PEIR Murray River-4","face":80,"carries":"own PEIR share","named":false,"n":125,"median":85,"mean":86.3,"p10":85,"p90":90,"lo":85,"hi":115,"sd":4.0,"winMean":86.4,"loseMean":86.3,"delta":0.1,"deltaCi":1.4,"winPct":23.2,"score":0.392,"scoreCi":0.07,"unbid":55.4},{"id":"P5","name":"PEIR Summerside-5","face":80,"carries":"own PEIR share","named":false,"n":133,"median":85,"mean":86.8,"p10":85,"p90":90,"lo":85,"hi":110,"sd":4.4,"winMean":87.9,"loseMean":86.3,"delta":1.6,"deltaCi":1.9,"winPct":29.3,"score":0.451,"scoreCi":0.07,"unbid":50.7},{"id":"P6","name":"PEIR Georgetown-6","face":80,"carries":"own PEIR share","named":false,"n":88,"median":85.0,"mean":86.4,"p10":85,"p90":90,"lo":85,"hi":110,"sd":3.6,"winMean":86.2,"loseMean":86.4,"delta":-0.2,"deltaCi":1.4,"winPct":28.4,"score":0.455,"scoreCi":0.084,"unbid":61.6},{"id":"P7","name":"PEIR Charlottetown-7","face":80,"carries":"own PEIR share","named":false,"n":146,"median":85.0,"mean":87.0,"p10":85,"p90":95,"lo":85,"hi":100,"sd":3.8,"winMean":86.3,"loseMean":87.2,"delta":-1.0,"deltaCi":1.1,"winPct":26.7,"score":0.445,"scoreCi":0.064,"unbid":46.7},{"id":"MC","name":"Merchants and Co.","face":40,"carries":"10% Shortline share","named":true,"n":432,"median":50.0,"mean":54.4,"p10":45,"p90":66,"lo":45,"hi":90,"sd":9.6,"winMean":53.3,"loseMean":55.0,"delta":-1.7,"deltaCi":1.8,"winPct":37.3,"score":0.528,"scoreCi":0.039,"unbid":4.6},{"id":"VR","name":"Vernon River Bridge","face":40,"carries":"10% Shortline share","named":true,"n":433,"median":50,"mean":54.2,"p10":45,"p90":70,"lo":45,"hi":95,"sd":9.8,"winMean":52.5,"loseMean":55.2,"delta":-2.6,"deltaCi":1.8,"winPct":36.3,"score":0.539,"scoreCi":0.038,"unbid":4.2}],"coord":{"order":["UB","MC","VR","SBC","HSE","RF","RA","ML","SL","SB"],"solo":{"ML":{"winPct":32.2,"n":423},"SL":{"winPct":31.1,"n":440},"UB":{"winPct":39.1,"n":435},"RF":{"winPct":34.8,"n":428},"HSE":{"winPct":36.0,"n":430},"RA":{"winPct":32.5,"n":434},"SBC":{"winPct":36.1,"n":432},"SB":{"winPct":29.4,"n":439},"MC":{"winPct":37.7,"n":453},"VR":{"winPct":37.2,"n":452}},"pair":{"HSE|SL":{"winPct":35.6,"n":101},"ML|UB":{"winPct":36.7,"n":109},"ML|VR":{"winPct":40.4,"n":109},"UB|VR":{"winPct":47.5,"n":118},"MC|RA":{"winPct":34.8,"n":138},"MC|SB":{"winPct":34.0,"n":144},"MC|SBC":{"winPct":44.7,"n":123},"RA|SB":{"winPct":25.4,"n":118},"RA|SBC":{"winPct":38.1,"n":105},"SB|SBC":{"winPct":29.3,"n":123},"MC|ML":{"winPct":30.6,"n":98},"MC|UB":{"winPct":47.6,"n":124},"MC|VR":{"winPct":37.3,"n":177},"ML|SBC":{"winPct":36.9,"n":84},"SBC|UB":{"winPct":43.1,"n":102},"SBC|VR":{"winPct":39.2,"n":125},"HSE|RA":{"winPct":38.5,"n":122},"HSE|SB":{"winPct":32.1,"n":106},"RA|SL":{"winPct":31.2,"n":80},"SB|SL":{"winPct":23.8,"n":130},"HSE|VR":{"winPct":43.9,"n":114},"SB|VR":{"winPct":25.6,"n":133},"SL|VR":{"winPct":34.4,"n":163},"ML|RA":{"winPct":32.8,"n":125},"HSE|RF":{"winPct":37.1,"n":116},"HSE|UB":{"winPct":41.8,"n":98},"RF|SL":{"winPct":41.7,"n":72},"RF|UB":{"winPct":40.8,"n":120},"SL|UB":{"winPct":38.7,"n":106},"ML|SB":{"winPct":26.1,"n":88},"RA|VR":{"winPct":36.2,"n":141},"HSE|MC":{"winPct":42.5,"n":134},"MC|RF":{"winPct":45.2,"n":115},"HSE|SBC":{"winPct":38.9,"n":126},"RA|RF":{"winPct":39.4,"n":137},"RF|SBC":{"winPct":33.9,"n":124},"ML|SL":{"winPct":33.8,"n":68},"SBC|SL":{"winPct":29.5,"n":122},"RF|SB":{"winPct":32.1,"n":134},"SB|UB":{"winPct":37.7,"n":122},"HSE|ML":{"winPct":31.5,"n":108},"MC|SL":{"winPct":32.9,"n":152},"RF|VR":{"winPct":39.5,"n":119},"ML|RF":{"winPct":31.9,"n":119},"RA|UB":{"winPct":44.0,"n":100}},"fair":33.3},"timing":{"corps":[{"id":"MR","name":"Murray River","overallPct":40.1,"n":372,"cells":{"5":{"winPct":45.9,"n":61},"6":{"winPct":41.0,"n":78},"7":{"winPct":35.3,"n":34},"1":{"winPct":29.0,"n":69},"4":{"winPct":41.2,"n":51},"3":{"winPct":50.0,"n":28},"2":{"winPct":43.1,"n":51}}},{"id":"Gt","name":"Georgetown","overallPct":35.8,"n":355,"cells":{"2":{"winPct":33.3,"n":75},"1":{"winPct":26.2,"n":65},"5":{"winPct":38.5,"n":52},"6":{"winPct":36.7,"n":49},"4":{"winPct":40.8,"n":49},"7":{"winPct":45.5,"n":33},"3":{"winPct":37.5,"n":32}}},{"id":"C","name":"Charlottetown","overallPct":35.7,"n":429,"cells":{"3":{"winPct":33.6,"n":122},"6":{"winPct":35.3,"n":34},"1":{"winPct":36.4,"n":44},"2":{"winPct":26.3,"n":57},"5":{"winPct":47.2,"n":72},"4":{"winPct":33.3,"n":93}}},{"id":"S","name":"Summerside","overallPct":35.1,"n":413,"cells":{"6":{"winPct":27.0,"n":37},"3":{"winPct":44.0,"n":91},"4":{"winPct":28.9,"n":76},"5":{"winPct":38.6,"n":70},"2":{"winPct":29.5,"n":61},"1":{"winPct":36.4,"n":66}}},{"id":"MS","name":"Mount Stewart","overallPct":35.0,"n":397,"cells":{"4":{"winPct":41.5,"n":82},"3":{"winPct":35.6,"n":73},"2":{"winPct":25.8,"n":66},"5":{"winPct":32.9,"n":76},"6":{"winPct":37.2,"n":43},"7":{"winPct":26.7,"n":15},"1":{"winPct":40.5,"n":42}}},{"id":"So","name":"Souris","overallPct":33.4,"n":377,"cells":{"1":{"winPct":39.1,"n":64},"4":{"winPct":30.2,"n":63},"2":{"winPct":34.0,"n":50},"3":{"winPct":38.0,"n":71},"5":{"winPct":29.1,"n":55},"7":{"winPct":37.0,"n":27},"6":{"winPct":25.5,"n":47}}},{"id":"A","name":"Alberton","overallPct":27.0,"n":352,"cells":{"2":{"winPct":27.0,"n":74},"6":{"winPct":27.5,"n":51},"3":{"winPct":32.6,"n":43},"5":{"winPct":20.5,"n":44},"7":{"winPct":36.1,"n":36},"4":{"winPct":27.8,"n":36},"1":{"winPct":22.1,"n":68}}}],"pooled":[{"pos":1,"winPct":32.1,"n":418},{"pos":2,"winPct":30.9,"n":434},{"pos":3,"winPct":37.8,"n":460},{"pos":4,"winPct":34.9,"n":450},{"pos":5,"winPct":37.0,"n":430},{"pos":6,"winPct":33.6,"n":339},{"pos":7,"winPct":37.8,"n":164}],"fair":33.3,"maxPos":7}},"p4":{"nGames":291,"fair":25.0,"lots":[{"id":"ML","name":"Mainline Concession","face":160,"carries":"Mainline presidency (20%)","named":true,"n":255,"median":175,"mean":176.4,"p10":165,"p90":190,"lo":165,"hi":215,"sd":11.1,"winMean":175.2,"loseMean":176.7,"delta":-1.5,"deltaCi":3.2,"winPct":21.2,"score":0.473,"scoreCi":0.045,"unbid":4.5},{"id":"SL","name":"Short Line Concession","face":160,"carries":"Shortline presidency (20%)","named":true,"n":242,"median":170.0,"mean":175.0,"p10":165,"p90":190,"lo":165,"hi":220,"sd":11.5,"winMean":173.2,"loseMean":175.6,"delta":-2.4,"deltaCi":3.2,"winPct":24.0,"score":0.457,"scoreCi":0.049,"unbid":6.9},{"id":"UB","name":"Union Bank","face":120,"carries":"10% Mainline share","named":true,"n":244,"median":140.0,"mean":140.6,"p10":125,"p90":160,"lo":125,"hi":205,"sd":15.7,"winMean":137.3,"loseMean":142.0,"delta":-4.7,"deltaCi":3.9,"winPct":30.3,"score":0.501,"scoreCi":0.05,"unbid":5.1},{"id":"RF","name":"Railcar Ferry","face":120,"carries":"10% Mainline share","named":true,"n":229,"median":125,"mean":129.2,"p10":125,"p90":140,"lo":125,"hi":150,"sd":5.9,"winMean":128.2,"loseMean":129.6,"delta":-1.4,"deltaCi":1.5,"winPct":24.9,"score":0.505,"scoreCi":0.048,"unbid":12.6},{"id":"HSE","name":"Hunslet Steam Engine","face":110,"carries":"no share","named":true,"n":253,"median":125,"mean":125.5,"p10":115,"p90":140,"lo":115,"hi":170,"sd":11.5,"winMean":122.9,"loseMean":126.3,"delta":-3.4,"deltaCi":2.9,"winPct":25.7,"score":0.515,"scoreCi":0.045,"unbid":4.9},{"id":"RA","name":"Royal Agricultural Society","face":110,"carries":"10% Mainline share","named":true,"n":226,"median":115.0,"mean":119.3,"p10":115,"p90":125,"lo":115,"hi":145,"sd":5.8,"winMean":118.9,"loseMean":119.4,"delta":-0.5,"deltaCi":1.7,"winPct":20.8,"score":0.5,"scoreCi":0.046,"unbid":15.0},{"id":"SBC","name":"Schreiber & Burpee","face":100,"carries":"no share","named":true,"n":244,"median":110.0,"mean":113.9,"p10":105,"p90":130,"lo":105,"hi":155,"sd":10.8,"winMean":114.2,"loseMean":113.8,"delta":0.4,"deltaCi":3.0,"winPct":29.1,"score":0.544,"scoreCi":0.046,"unbid":7.9},{"id":"SB","name":"Shipbuilding","face":90,"carries":"10% Shortline share","named":true,"n":240,"median":95.0,"mean":99.5,"p10":95,"p90":110,"lo":95,"hi":120,"sd":6.7,"winMean":99.5,"loseMean":99.5,"delta":0.0,"deltaCi":2.0,"winPct":23.8,"score":0.518,"scoreCi":0.045,"unbid":9.4},{"id":"P1","name":"PEIR Souris-1","face":80,"carries":"own PEIR share","named":false,"n":124,"median":85.0,"mean":88.1,"p10":85,"p90":95,"lo":85,"hi":130,"sd":6.3,"winMean":86.8,"loseMean":88.5,"delta":-1.7,"deltaCi":1.8,"winPct":22.6,"score":0.465,"scoreCi":0.064,"unbid":27.1},{"id":"P2","name":"PEIR Alberton-2","face":80,"carries":"own PEIR share","named":false,"n":111,"median":85,"mean":87.0,"p10":85,"p90":95,"lo":85,"hi":115,"sd":4.9,"winMean":86.3,"loseMean":87.2,"delta":-0.9,"deltaCi":1.8,"winPct":27.0,"score":0.495,"scoreCi":0.072,"unbid":41.0},{"id":"P3","name":"PEIR Mount Stewart-3","face":80,"carries":"own PEIR share","named":false,"n":99,"median":85,"mean":87.6,"p10":85,"p90":95,"lo":85,"hi":110,"sd":4.8,"winMean":86.1,"loseMean":88.1,"delta":-1.9,"deltaCi":1.6,"winPct":22.2,"score":0.461,"scoreCi":0.074,"unbid":46.5},{"id":"P4","name":"PEIR Murray River-4","face":80,"carries":"own PEIR share","named":false,"n":94,"median":85.0,"mean":88.4,"p10":85,"p90":95,"lo":85,"hi":120,"sd":7.2,"winMean":87.8,"loseMean":88.7,"delta":-0.9,"deltaCi":3.6,"winPct":28.7,"score":0.532,"scoreCi":0.074,"unbid":48.9},{"id":"P5","name":"PEIR Summerside-5","face":80,"carries":"own PEIR share","named":false,"n":112,"median":85.0,"mean":87.7,"p10":85,"p90":95,"lo":85,"hi":150,"sd":7.6,"winMean":87.5,"loseMean":87.8,"delta":-0.3,"deltaCi":2.6,"winPct":28.6,"score":0.494,"scoreCi":0.072,"unbid":41.1},{"id":"P6","name":"PEIR Georgetown-6","face":80,"carries":"own PEIR share","named":false,"n":83,"median":85,"mean":86.0,"p10":85,"p90":90,"lo":85,"hi":105,"sd":3.1,"winMean":86.4,"loseMean":85.9,"delta":0.5,"deltaCi":2.0,"winPct":16.9,"score":0.418,"scoreCi":0.078,"unbid":50.6},{"id":"P7","name":"PEIR Charlottetown-7","face":80,"carries":"own PEIR share","named":false,"n":106,"median":85.0,"mean":87.7,"p10":85,"p90":95,"lo":85,"hi":120,"sd":6.1,"winMean":89.3,"loseMean":87.4,"delta":1.9,"deltaCi":3.5,"winPct":19.8,"score":0.456,"scoreCi":0.068,"unbid":41.4},{"id":"MC","name":"Merchants and Co.","face":40,"carries":"10% Shortline share","named":true,"n":278,"median":50.0,"mean":52.6,"p10":45,"p90":65,"lo":45,"hi":90,"sd":8.9,"winMean":52.0,"loseMean":52.8,"delta":-0.8,"deltaCi":2.3,"winPct":27.3,"score":0.542,"scoreCi":0.043,"unbid":2.8},{"id":"VR","name":"Vernon River Bridge","face":40,"carries":"10% Shortline share","named":true,"n":261,"median":50,"mean":51.2,"p10":45,"p90":65,"lo":45,"hi":85,"sd":8.1,"winMean":50.3,"loseMean":51.7,"delta":-1.4,"deltaCi":2.0,"winPct":29.9,"score":0.54,"scoreCi":0.046,"unbid":6.5},{"id":"IB","name":"Ice Boat Shipping","face":40,"carries":"any 10% market share","named":true,"n":266,"median":50.0,"mean":52.0,"p10":45,"p90":65,"lo":45,"hi":90,"sd":7.6,"winMean":50.4,"loseMean":52.5,"delta":-2.1,"deltaCi":1.9,"winPct":25.2,"score":0.499,"scoreCi":0.044,"unbid":2.9}],"coord":{"order":["UB","VR","SBC","MC","HSE","RF","IB","SL","SB","RA","ML"],"solo":{"ML":{"winPct":21.0,"n":267},"SL":{"winPct":23.5,"n":260},"UB":{"winPct":29.6,"n":257},"RF":{"winPct":25.2,"n":262},"HSE":{"winPct":26.3,"n":266},"RA":{"winPct":22.9,"n":266},"SBC":{"winPct":28.7,"n":265},"SB":{"winPct":23.4,"n":265},"MC":{"winPct":27.3,"n":286},"VR":{"winPct":29.4,"n":279},"IB":{"winPct":25.2,"n":274}},"pair":{"IB|RF":{"winPct":25.5,"n":51},"IB|SB":{"winPct":28.4,"n":67},"IB|SBC":{"winPct":38.0,"n":50},"RF|SB":{"winPct":21.0,"n":62},"RF|SBC":{"winPct":34.0,"n":47},"SB|SBC":{"winPct":23.6,"n":55},"ML|RA":{"winPct":16.7,"n":60},"ML|VR":{"winPct":22.7,"n":44},"RA|VR":{"winPct":27.3,"n":55},"HSE|MC":{"winPct":28.6,"n":56},"HSE|SL":{"winPct":28.9,"n":38},"MC|SL":{"winPct":31.1,"n":61},"IB|MC":{"winPct":27.5,"n":69},"IB|UB":{"winPct":30.8,"n":52},"MC|SB":{"winPct":25.3,"n":79},"MC|UB":{"winPct":34.1,"n":44},"SB|UB":{"winPct":22.0,"n":41},"ML|SBC":{"winPct":30.8,"n":39},"ML|SL":{"winPct":22.2,"n":27},"SBC|SL":{"winPct":29.2,"n":48},"RA|RF":{"winPct":20.0,"n":50},"HSE|VR":{"winPct":32.7,"n":49},"ML|UB":{"winPct":19.1,"n":47},"SL|UB":{"winPct":29.8,"n":47},"SL|VR":{"winPct":27.9,"n":61},"UB|VR":{"winPct":28.6,"n":42},"IB|RA":{"winPct":26.8,"n":56},"MC|RA":{"winPct":16.7,"n":54},"MC|SBC":{"winPct":24.6,"n":61},"RA|SB":{"winPct":24.5,"n":53},"RA|SBC":{"winPct":25.5,"n":55},"SB|SL":{"winPct":14.6,"n":48},"SB|VR":{"winPct":25.4,"n":71},"HSE|IB":{"winPct":22.2,"n":54},"HSE|ML":{"winPct":17.4,"n":46},"SBC|UB":{"winPct":45.8,"n":48},"MC|RF":{"winPct":22.4,"n":58},"RA|UB":{"winPct":29.8,"n":47},"HSE|RF":{"winPct":22.4,"n":58},"ML|RF":{"winPct":19.3,"n":57},"RF|UB":{"winPct":37.2,"n":43},"HSE|SB":{"winPct":21.6,"n":51},"HSE|SBC":{"winPct":29.3,"n":41},"SBC|VR":{"winPct":30.8,"n":65},"HSE|UB":{"winPct":33.3,"n":42},"MC|VR":{"winPct":31.6,"n":76},"HSE|RA":{"winPct":19.1,"n":47},"IB|ML":{"winPct":22.8,"n":57},"RA|SL":{"winPct":23.7,"n":38},"RF|SL":{"winPct":16.2,"n":37},"MC|ML":{"winPct":20.0,"n":50},"ML|SB":{"winPct":25.5,"n":47},"IB|VR":{"winPct":22.7,"n":66},"RF|VR":{"winPct":44.0,"n":50},"IB|SL":{"winPct":27.7,"n":47}},"fair":25.0},"timing":{"corps":[{"id":"C","name":"Charlottetown","overallPct":37.0,"n":265,"cells":{"3":{"winPct":30.4,"n":56},"4":{"winPct":51.7,"n":60},"5":{"winPct":33.3,"n":39},"1":{"winPct":27.8,"n":36},"2":{"winPct":29.3,"n":41},"6":{"winPct":46.2,"n":26}}},{"id":"MR","name":"Murray River","overallPct":31.3,"n":246,"cells":{"1":{"winPct":17.5,"n":40},"5":{"winPct":31.0,"n":42},"4":{"winPct":36.1,"n":36},"2":{"winPct":30.6,"n":36},"3":{"winPct":40.0,"n":35},"6":{"winPct":36.6,"n":41},"7":{"winPct":25.0,"n":16}}},{"id":"Gt","name":"Georgetown","overallPct":29.4,"n":228,"cells":{"2":{"winPct":20.9,"n":43},"5":{"winPct":23.3,"n":30},"4":{"winPct":30.8,"n":26},"6":{"winPct":47.4,"n":38},"7":{"winPct":28.0,"n":25},"1":{"winPct":19.0,"n":42},"3":{"winPct":41.7,"n":24}}},{"id":"MS","name":"Mount Stewart","overallPct":27.7,"n":260,"cells":{"2":{"winPct":22.2,"n":36},"3":{"winPct":43.6,"n":39},"1":{"winPct":23.7,"n":38},"4":{"winPct":27.3,"n":55},"6":{"winPct":16.7,"n":30},"5":{"winPct":29.2,"n":48}}},{"id":"So","name":"Souris","overallPct":25.8,"n":244,"cells":{"5":{"winPct":29.5,"n":44},"6":{"winPct":37.9,"n":29},"4":{"winPct":28.6,"n":35},"7":{"winPct":5.6,"n":18},"1":{"winPct":21.6,"n":37},"2":{"winPct":26.3,"n":38},"3":{"winPct":23.3,"n":43}}},{"id":"S","name":"Summerside","overallPct":24.8,"n":258,"cells":{"4":{"winPct":36.4,"n":44},"2":{"winPct":22.9,"n":35},"6":{"winPct":18.9,"n":37},"1":{"winPct":22.2,"n":36},"3":{"winPct":20.7,"n":58},"5":{"winPct":25.7,"n":35}}},{"id":"A","name":"Alberton","overallPct":22.0,"n":218,"cells":{"6":{"winPct":29.0,"n":31},"5":{"winPct":22.5,"n":40},"3":{"winPct":19.4,"n":31},"1":{"winPct":17.1,"n":35},"7":{"winPct":21.7,"n":23},"4":{"winPct":33.3,"n":30},"2":{"winPct":10.7,"n":28}}}],"pooled":[{"pos":1,"winPct":21.2,"n":264},{"pos":2,"winPct":23.7,"n":257},{"pos":3,"winPct":30.1,"n":286},{"pos":4,"winPct":36.0,"n":286},{"pos":5,"winPct":28.1,"n":278},{"pos":6,"winPct":33.2,"n":232},{"pos":7,"winPct":24.1,"n":116}],"fair":25.0,"maxPos":7}},"railway":[{"id":"RA","name":"Royal Agricultural Society","kind":"main","carries":"a 10% Mainline share","spread":0.168,"rows":[{"corp":"So","corpName":"Souris","n":84,"price":119.0,"score":0.558,"ci":0.083},{"corp":"S","corpName":"Summerside","n":88,"price":120.0,"score":0.528,"ci":0.074},{"corp":"MR","corpName":"Murray River","n":88,"price":121.0,"score":0.485,"ci":0.086},{"corp":"Gt","corpName":"Georgetown","n":90,"price":120,"score":0.478,"ci":0.083},{"corp":"C","corpName":"Charlottetown","n":74,"price":119.0,"score":0.468,"ci":0.088},{"corp":"A","corpName":"Alberton","n":91,"price":119.0,"score":0.441,"ci":0.078},{"corp":"MS","corpName":"Mount Stewart","n":73,"price":120.0,"score":0.39,"ci":0.071}]},{"id":"SL","name":"Short Line Concession","kind":"short","carries":"the Shortline's 20% president's certificate","spread":0.163,"rows":[{"corp":"MR","corpName":"Murray River","n":83,"price":173.0,"score":0.534,"ci":0.092},{"corp":"So","corpName":"Souris","n":78,"price":175.0,"score":0.504,"ci":0.087},{"corp":"C","corpName":"Charlottetown","n":91,"price":178.0,"score":0.495,"ci":0.076},{"corp":"Gt","corpName":"Georgetown","n":106,"price":174.0,"score":0.478,"ci":0.075},{"corp":"S","corpName":"Summerside","n":87,"price":177.0,"score":0.416,"ci":0.086},{"corp":"MS","corpName":"Mount Stewart","n":98,"price":177.0,"score":0.412,"ci":0.081},{"corp":"A","corpName":"Alberton","n":98,"price":174.0,"score":0.371,"ci":0.079}]},{"id":"UB","name":"Union Bank","kind":"main","carries":"a 10% Mainline share on the bank charter","spread":0.127,"rows":[{"corp":"MR","corpName":"Murray River","n":101,"price":141.0,"score":0.566,"ci":0.081},{"corp":"S","corpName":"Summerside","n":100,"price":143.0,"score":0.55,"ci":0.084},{"corp":"A","corpName":"Alberton","n":97,"price":144.0,"score":0.533,"ci":0.082},{"corp":"C","corpName":"Charlottetown","n":83,"price":142.0,"score":0.52,"ci":0.079},{"corp":"Gt","corpName":"Georgetown","n":104,"price":140.0,"score":0.513,"ci":0.081},{"corp":"So","corpName":"Souris","n":93,"price":140.0,"score":0.511,"ci":0.086},{"corp":"MS","corpName":"Mount Stewart","n":77,"price":143.0,"score":0.439,"ci":0.088}]},{"id":"ML","name":"Mainline Concession","kind":"main","carries":"the Mainline's 20% president's certificate","spread":0.124,"rows":[{"corp":"MS","corpName":"Mount Stewart","n":75,"price":179.0,"score":0.551,"ci":0.086},{"corp":"So","corpName":"Souris","n":97,"price":178.0,"score":0.54,"ci":0.078},{"corp":"C","corpName":"Charlottetown","n":77,"price":180.0,"score":0.53,"ci":0.09},{"corp":"MR","corpName":"Murray River","n":103,"price":176.0,"score":0.471,"ci":0.072},{"corp":"Gt","corpName":"Georgetown","n":102,"price":177.0,"score":0.451,"ci":0.073},{"corp":"S","corpName":"Summerside","n":99,"price":181.0,"score":0.449,"ci":0.083},{"corp":"A","corpName":"Alberton","n":98,"price":177.0,"score":0.427,"ci":0.075}]},{"id":"SB","name":"Shipbuilding","kind":"short","carries":"a reserved 10% Shortline share","spread":0.104,"rows":[{"corp":"C","corpName":"Charlottetown","n":98,"price":99.0,"score":0.522,"ci":0.073},{"corp":"S","corpName":"Summerside","n":87,"price":99.0,"score":0.51,"ci":0.08},{"corp":"So","corpName":"Souris","n":75,"price":99.0,"score":0.509,"ci":0.092},{"corp":"MR","corpName":"Murray River","n":77,"price":99.0,"score":0.496,"ci":0.088},{"corp":"Gt","corpName":"Georgetown","n":99,"price":98.0,"score":0.463,"ci":0.071},{"corp":"MS","corpName":"Mount Stewart","n":91,"price":101.0,"score":0.462,"ci":0.088},{"corp":"A","corpName":"Alberton","n":91,"price":100.0,"score":0.418,"ci":0.082}]},{"id":"MC","name":"Merchants and Co.","kind":"short","carries":"a reserved 10% Shortline share","spread":0.089,"rows":[{"corp":"So","corpName":"Souris","n":93,"price":52.0,"score":0.579,"ci":0.079},{"corp":"MR","corpName":"Murray River","n":84,"price":54.0,"score":0.56,"ci":0.079},{"corp":"A","corpName":"Alberton","n":102,"price":54.0,"score":0.547,"ci":0.08},{"corp":"MS","corpName":"Mount Stewart","n":111,"price":54.0,"score":0.541,"ci":0.071},{"corp":"C","corpName":"Charlottetown","n":99,"price":56.0,"score":0.54,"ci":0.076},{"corp":"Gt","corpName":"Georgetown","n":116,"price":52.0,"score":0.491,"ci":0.074},{"corp":"S","corpName":"Summerside","n":97,"price":53.0,"score":0.49,"ci":0.08}]},{"id":"VR","name":"Vernon River Bridge","kind":"short","carries":"a reserved 10% Shortline share","spread":0.089,"rows":[{"corp":"So","corpName":"Souris","n":90,"price":51.0,"score":0.583,"ci":0.081},{"corp":"S","corpName":"Summerside","n":92,"price":54.0,"score":0.563,"ci":0.075},{"corp":"Gt","corpName":"Georgetown","n":110,"price":52.0,"score":0.548,"ci":0.074},{"corp":"MS","corpName":"Mount Stewart","n":112,"price":53.0,"score":0.542,"ci":0.07},{"corp":"C","corpName":"Charlottetown","n":102,"price":55.0,"score":0.541,"ci":0.076},{"corp":"MR","corpName":"Murray River","n":78,"price":54.0,"score":0.511,"ci":0.092},{"corp":"A","corpName":"Alberton","n":103,"price":54.0,"score":0.494,"ci":0.077}]},{"id":"RF","name":"Railcar Ferry","kind":"main","carries":"a 10% Mainline share","spread":0.058,"rows":[{"corp":"A","corpName":"Alberton","n":90,"price":130.0,"score":0.533,"ci":0.084},{"corp":"MR","corpName":"Murray River","n":89,"price":130.0,"score":0.522,"ci":0.083},{"corp":"C","corpName":"Charlottetown","n":70,"price":131.0,"score":0.517,"ci":0.091},{"corp":"So","corpName":"Souris","n":84,"price":129.0,"score":0.514,"ci":0.08},{"corp":"Gt","corpName":"Georgetown","n":89,"price":129.0,"score":0.498,"ci":0.083},{"corp":"MS","corpName":"Mount Stewart","n":79,"price":130.0,"score":0.479,"ci":0.087},{"corp":"S","corpName":"Summerside","n":87,"price":129.0,"score":0.475,"ci":0.079}]}]};
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('en-US');
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let MODE = 'p3';
+const D = () => DATA[MODE];
+const FAIR = () => D().fair;
+
+/* ---- scales -------------------------------------------------------------- */
+// win-rate axis: centred on fair share, +/- 22 points
+const WIN_HALF = 22;
+const wlo = () => FAIR()-WIN_HALF, whi = () => FAIR()+WIN_HALF;
+const wx = v => (Math.max(wlo(),Math.min(whi(),v))-wlo())/(whi()-wlo());
+const wtone = v => v>=FAIR() ? 'var(--flood)' : 'var(--ebb)';
+// heatmap shade around fair share (win-rate cells), full colour at +/-13 pts
+function heat(v, fair, span){
+  const t = Math.max(-1, Math.min(1, (v-fair)/span));
+  const base = t>=0 ? [46,110,107] : [125,59,84];
+  const a = Math.abs(t)*0.82;
+  return {bg:`rgba(${base.join(',')},${a.toFixed(3)})`, fg:a>0.45?'#F2F5F1':'var(--ink)'};
+}
+
+function facts(){
+  const m = DATA.meta;
+  $('#facts').innerHTML = [
+    [fmt(m.games),'games'],
+    [fmt(m.p3)+' / '+fmt(m.p4),'3p / 4p'],
+    [fmt(m.attribLots),'lots priced'],
+    [m.from.slice(0,7)+' → '+m.to.slice(0,7),'span'],
+  ].map(([b,s])=>`<div class="fact"><b>${b}</b><span>${s}</span></div>`).join('');
+}
+
+/* ---- price ladder: face + p10..p90 range + median ------------------------ */
+function ladder(){
+  const rows = D().lots.filter(r=>r.named).slice().sort((a,b)=>b.median-a.median);
+  const W=1000, rowH=30, padL=210, padR=70, top=40, H=top+rows.length*rowH+14;
+  const maxV = 250;
+  const px = v => padL + (v/maxV)*(W-padL-padR);
+  let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Typical price by private">`;
+  for(const t of [0,50,100,150,200,250]){
+    s+=`<line x1="${px(t)}" y1="${top-12}" x2="${px(t)}" y2="${H-8}" stroke="var(--rule)" stroke-width=".5"/>`;
+    s+=`<text class="axis" x="${px(t)}" y="${top-20}" text-anchor="middle">$${t}</text>`;
+  }
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+12;
+    s+=`<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    // usual range
+    s+=`<rect x="${px(r.p10)}" y="${y-5}" width="${Math.max(1,px(r.p90)-px(r.p10))}" height="10" fill="var(--rule)" opacity=".5"/>`;
+    // face marker (hollow)
+    s+=`<circle cx="${px(r.face)}" cy="${y}" r="4" fill="var(--paper)" stroke="var(--dim)" stroke-width="1.2"/>`;
+    // median notch
+    s+=`<line x1="${px(r.median)}" y1="${y-8}" x2="${px(r.median)}" y2="${y+8}" stroke="var(--ink)" stroke-width="2"/>`;
+    s+=`<text class="rowmeta" x="${W-padR+8}" y="${y+4}">$${r.median}</text>`;
+    s+=`<title>${esc(r.name)}: face $${r.face}, median $${r.median}, usual $${r.p10}–$${r.p90}, high $${r.hi} (n=${r.n})</title>`;
+  });
+  // key
+  const ky=H-2;
+  s+=`<circle cx="${padL}" cy="${ky}" r="4" fill="var(--paper)" stroke="var(--dim)"/><text class="rowmeta" x="${padL+10}" y="${ky+4}">face</text>`;
+  s+=`<line x1="${padL+70}" y1="${ky-6}" x2="${padL+70}" y2="${ky+6}" stroke="var(--ink)" stroke-width="2"/><text class="rowmeta" x="${padL+78}" y="${ky+4}">median bid</text>`;
+  s+=`<rect x="${padL+185}" y="${ky-4}" width="26" height="8" fill="var(--rule)" opacity=".5"/><text class="rowmeta" x="${padL+217}" y="${ky+4}">middle 80%</text>`;
+  $('#ladder').innerHTML = s+'</svg>';
+}
+
+/* ---- price table --------------------------------------------------------- */
+const COLS = [
+  ['name','Private',  r=>esc(r.name)],
+  ['carries','Carries', r=>`<span class="carry">${esc(r.carries)}</span>`],
+  ['face','Face',     r=>'$'+r.face],
+  ['median','Typical',r=>'$'+r.median],
+  ['p10','Range',     r=>`$${r.p10}–$${r.p90}`],
+  ['winMean','Winners paid', r=>r.winMean!=null?'$'+r.winMean.toFixed(0):'—'],
+  ['loseMean','Others paid', r=>r.loseMean!=null?'$'+r.loseMean.toFixed(0):'—'],
+  ['winPct','Win rate', r=>`<span class="${r.winPct>=FAIR()?'pos':'neg'}">${r.winPct.toFixed(0)}%</span>`],
+  ['unbid','Unbid',   r=>r.unbid.toFixed(0)+'%'],
+  ['n','Lots',        r=>fmt(r.n)],
+];
+let sortKey='median', sortDir=-1;
+function priceTable(){
+  const rows = D().lots.slice().sort((a,b)=>{
+    const x=a[sortKey], y=b[sortKey];
+    return (typeof x==='string'?x.localeCompare(y):x-y)*sortDir;
+  });
+  $('#priceTable thead').innerHTML='<tr>'+COLS.map(([k,l])=>
+    `<th data-k="${k}"${k===sortKey?` aria-sort="${sortDir<0?'descending':'ascending'}"`:''}>${l}</th>`).join('')+'</tr>';
+  $('#priceTable tbody').innerHTML=rows.map(r=>
+    `<tr class="${r.named?'':'dim'}">`+COLS.map(([,,f])=>`<td>${f(r)}</td>`).join('')+'</tr>').join('');
+  $('#priceTable thead').querySelectorAll('th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;
+    if(k===sortKey) sortDir*=-1; else {sortKey=k; sortDir=(k==='name'||k==='carries')?1:-1;}
+    priceTable();
+  });
+}
+
+/* ---- winners-minus-others delta ------------------------------------------ */
+function delta(){
+  const rows = D().lots.filter(r=>r.winMean!=null&&r.loseMean!=null)
+                       .slice().sort((a,b)=>a.delta-b.delta);
+  const W=1000, rowH=25, padL=210, padR=130, top=44, H=top+rows.length*rowH+12;
+  const lim=6;
+  const px=v=>padL+((Math.max(-lim,Math.min(lim,v))+lim)/(2*lim))*(W-padL-padR);
+  let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Price gap between winners and other buyers">`;
+  for(const t of [-4,-2,0,2,4]){
+    s+=`<line x1="${px(t)}" y1="${top-14}" x2="${px(t)}" y2="${H-8}" stroke="${t===0?'var(--ink)':'var(--rule)'}" stroke-width="${t===0?1:.5}"/>`;
+    s+=`<text class="axis" x="${px(t)}" y="${top-22}" text-anchor="middle">${t>0?'+':''}${t===0?'$0':'$'+t}</text>`;
+  }
+  s+=`<text class="axis" x="${padL}" y="${top-22}">WINNERS PAID LESS</text>`;
+  s+=`<text class="axis" x="${W-padR}" y="${top-22}" text-anchor="end">PAID MORE</text>`;
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+10, a=px(0), b=px(r.delta), sig=Math.abs(r.delta)>r.deltaCi;
+    s+=`<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    s+=`<rect x="${Math.min(a,b)}" y="${y-6}" width="${Math.abs(b-a)}" height="12" fill="${r.delta<0?'var(--flood)':'var(--ebb)'}" opacity="${sig?'.9':'.4'}"/>`;
+    s+=`<line x1="${px(r.delta-r.deltaCi)}" y1="${y}" x2="${px(r.delta+r.deltaCi)}" y2="${y}" stroke="var(--ink)" stroke-width="1"/>`;
+    s+=`<text class="rowmeta" x="${W-padR+10}" y="${y+4}">${r.delta>0?'+':''}$${r.delta.toFixed(1)} ±${r.deltaCi.toFixed(1)}</text>`;
+    s+=`<title>${esc(r.name)}: winners $${r.winMean} vs others $${r.loseMean}</title>`;
+  });
+  $('#delta').innerHTML=s+'</svg>';
+  const solid=rows.filter(r=>Math.abs(r.delta)>r.deltaCi);
+  $('#deltaNote').textContent =
+    `${solid.length} of ${rows.length} lots clear their own confidence interval`
+    + (solid.length?': '+solid.map(r=>r.name).join(', ')+'. ':'. ')
+    + 'Solid bars clear it; faded bars don\u2019t. Most lots sell within a few dollars of the opening '
+    + 'bid, so the discipline shows up in the rare overpay, not the middle of the pack.';
+}
+
+/* ---- win rate by private ------------------------------------------------- */
+function winbars(){
+  const rows = D().lots.filter(r=>r.named).slice().sort((a,b)=>b.winPct-a.winPct);
+  const W=1000, rowH=27, padL=210, padR=96, top=44, H=top+rows.length*rowH+12;
+  const px=v=>padL+wx(v)*(W-padL-padR);
+  const f=FAIR();
+  let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Win rate by private">`;
+  s+=`<line x1="${px(f)}" y1="${top-16}" x2="${px(f)}" y2="${H-6}" stroke="var(--ink)"/>`;
+  s+=`<text class="axis" x="${px(f)}" y="${top-24}" text-anchor="middle">FAIR SHARE ${f.toFixed(0)}%</text>`;
+  s+=`<text class="axis" x="${padL}" y="${top-24}">WORSE</text>`;
+  s+=`<text class="axis" x="${W-padR}" y="${top-24}" text-anchor="end">BETTER</text>`;
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+10, a=px(f), b=px(r.winPct);
+    s+=`<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    s+=`<rect x="${Math.min(a,b)}" y="${y-6}" width="${Math.abs(b-a)}" height="12" fill="${wtone(r.winPct)}" opacity=".85"/>`;
+    s+=`<text class="rowmeta" x="${W-padR+10}" y="${y+4}">${r.winPct.toFixed(0)}%</text>`;
+    s+=`<title>${esc(r.name)}: buyer wins ${r.winPct}% vs ${f}% fair; finish score ${r.score} \u00b1${r.scoreCi} (n=${r.n})</title>`;
+  });
+  $('#winbars').innerHTML=s+'</svg>';
+}
+
+/* ---- coordination matrix ------------------------------------------------- */
+const LNAME = DATA.p4.lots.reduce((m,r)=>(m[r.id]=r.name,m),{});
+function short(id){ return {ML:'Mainline',SL:'Shortline',UB:'Union Bank',RF:'Railcar Ferry',
+  HSE:'Hunslet',RA:'Royal Ag.',SBC:'Schreiber',SB:'Shipbuild.',MC:'Merchants',VR:'Vernon R.',
+  IB:'Ice Boat'}[id]||id; }
+function coord(){
+  const c=D().coord, order=c.order, f=c.fair;
+  const key=(a,b)=>[a,b].sort().join('|');
+  let h='<table><thead><tr><th class="col"></th>'
+       + order.map(id=>`<th class="col">${esc(short(id))}</th>`).join('')+'</tr></thead><tbody>';
+  for(const a of order){
+    h+=`<tr><td class="head">${esc(LNAME[a]||a)}</td>`;
+    for(const b of order){
+      if(a===b){
+        const r=c.solo[a]; const s=heat(r.winPct,f,13);
+        h+=`<td class="cell diag" title="${esc(short(a))} on its own: wins ${r.winPct}% (n=${r.n})">`
+          +`<div style="background:${s.bg};color:${s.fg}"><b>${r.winPct.toFixed(0)}%</b><span>solo</span></div></td>`;
+        continue;
+      }
+      const r=c.pair[key(a,b)];
+      if(!r){ h+='<td class="cell"><div style="opacity:.3">—</div></td>'; continue; }
+      const s=heat(r.winPct,f,13);
+      h+=`<td class="cell" title="Holding both ${esc(short(a))} and ${esc(short(b))}: wins ${r.winPct}% (n=${r.n})">`
+        +`<div style="background:${s.bg};color:${s.fg}"><b>${r.winPct.toFixed(0)}%</b><span>n=${r.n}</span></div></td>`;
+    }
+    h+='</tr>';
+  }
+  $('#coord').innerHTML=h+'</tbody></table>';
+  // findings: best & worst pairs
+  const pairs=Object.entries(c.pair).map(([k,v])=>({ids:k.split('|'),...v}));
+  pairs.sort((x,y)=>y.winPct-x.winPct);
+  const top=pairs.slice(0,3), bot=pairs.slice(-3).reverse();
+  const nm=p=>`${short(p.ids[0])} + ${short(p.ids[1])}`;
+  $('#coordFind').innerHTML=`
+    <div class="finding"><h3>Union Bank is the private to build around</h3>
+      <p>The strongest pairings almost all include Union Bank — ${nm(top[0])} at ${top[0].winPct.toFixed(0)}%,
+         well over the ${f.toFixed(0)}% fair share. It is the best solo private too, so holding it and
+         adding almost anything cash-generating compounds the edge.</p></div>
+    <div class="finding"><h3>Shipbuilding drags its partners down</h3>
+      <p>The weakest combinations cluster around Shipbuilding and the two 20% concessions —
+         ${nm(bot[0])} bottoms out at ${bot[0].winPct.toFixed(0)}%. A cheap share with no earning
+         power spends money you need elsewhere; pairing two of them compounds the drag.</p></div>`;
+}
+
+/* ---- company timing matrix ----------------------------------------------- */
+function timing(){
+  const t=D().timing, f=t.fair, maxPos=t.maxPos;
+  const positions=[]; for(let p=1;p<=maxPos;p++) positions.push(p);
+  let h='<table><thead><tr><th class="col" style="text-align:left">Railway</th>'
+       +'<th class="col">Overall</th>'
+       +positions.map(p=>`<th class="col">${p===1?'1st<br>(seeded)':p===2?'2nd<br>(seeded)':p+(p===3?'rd':'th')}</th>`).join('')
+       +'</tr></thead><tbody>';
+  for(const c of t.corps){
+    const so=heat(c.overallPct,f,10);
+    h+=`<tr><td class="head">${esc(c.name)}</td>`;
+    h+=`<td class="over" title="${esc(c.name)}: starter wins ${c.overallPct}% overall (n=${c.n})">`
+      +`<div style="background:${so.bg};color:${so.fg}"><b>${c.overallPct.toFixed(0)}%</b></div></td>`;
+    for(const p of positions){
+      const r=c.cells[p];
+      if(!r){ h+='<td class="cell"><div style="opacity:.3">—</div></td>'; continue; }
+      const s=heat(r.winPct,f,13);
+      h+=`<td class="cell" title="${esc(c.name)} started ${p}${p===1?'st':p===2?'nd':p===3?'rd':'th'}: starter wins ${r.winPct}% (n=${r.n})">`
+        +`<div style="background:${s.bg};color:${s.fg}"><b>${r.winPct.toFixed(0)}%</b><span>n=${r.n}</span></div></td>`;
+    }
+    h+='</tr>';
+  }
+  $('#timing').innerHTML=h+'</tbody></table>';
+
+  // pooled start-order bars
+  const po=t.pooled;
+  const W=1000, colW=(W-60)/po.length, top=44, base=150, H=base+46;
+  const f2=f;
+  const yb=v=>{ const lo=f2-16, hi=f2+16; return top+(1-(Math.max(lo,Math.min(hi,v))-lo)/(hi-lo))*(base-top); };
+  let s=`<p class="eyebrow">Start order, all railways pooled</p>`
+      +`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Starter win rate by float order">`;
+  const zeroY=yb(f2);
+  s+=`<line x1="30" y1="${zeroY}" x2="${W-30}" y2="${zeroY}" stroke="var(--ink)"/>`;
+  s+=`<text class="axis" x="30" y="${zeroY-6}">FAIR SHARE ${f2.toFixed(0)}%</text>`;
+  po.forEach((d,i)=>{
+    const cx=30+colW*(i+0.5), bw=Math.min(70,colW*0.6);
+    const y=yb(d.winPct), h2=Math.abs(y-zeroY);
+    s+=`<rect x="${cx-bw/2}" y="${Math.min(y,zeroY)}" width="${bw}" height="${h2}" fill="${d.winPct>=f2?'var(--flood)':'var(--ebb)'}" opacity=".85"/>`;
+    s+=`<text class="rowmeta" x="${cx}" y="${Math.min(y,zeroY)-6}" text-anchor="middle">${d.winPct.toFixed(0)}%</text>`;
+    const lab = d.pos<=2 ? `${d.pos===1?'1st':'2nd'} · seeded` : `${d.pos}${d.pos===3?'rd':'th'} floated`;
+    s+=`<text class="axis" x="${cx}" y="${H-16}" text-anchor="middle">${lab}</text>`;
+    s+=`<text class="axis" x="${cx}" y="${H-3}" text-anchor="middle" opacity=".7">n=${d.n}</text>`;
+  });
+  $('#startOrder').innerHTML=s+'</svg>';
+
+  const corps=t.corps;
+  const bestPos=po.slice().sort((a,b)=>b.winPct-a.winPct)[0];
+  $('#timingFind').innerHTML=`
+    <div class="finding"><h3>The auction presidencies underperform the ones you float</h3>
+      <p>Pooled across every railway, the two companies seeded as Mainline and Shortline hand their
+         presidents a <b>below-fair-share</b> win rate — the players who instead float their own company
+         a little later, in the ${bestPos.pos<=2?'early':(bestPos.pos+(bestPos.pos===3?'rd':'th'))} operating slots,
+         do best. Winning the 20% concession in the opening auction buys prestige, not position.</p></div>
+    <div class="finding"><h3>${esc(corps[0].name)} is the railway to start; ${esc(corps[corps.length-1].name)} is the one to avoid</h3>
+      <p>${esc(corps[0].name)}'s starter wins ${corps[0].overallPct.toFixed(0)}% of the time against a
+         ${f.toFixed(0)}% fair share; ${esc(corps[corps.length-1].name)}'s starter manages only
+         ${corps[corps.length-1].overallPct.toFixed(0)}%. Which railway you commit to matters more than
+         the exact turn you commit — read the overall column first, the cells second.</p></div>`;
+}
+
+/* ---- railway grid (pooled, 0.500 scale) ---------------------------------- */
+const RORDER=['So','A','MS','MR','S','Gt','C'];
+const RCORP={So:'Souris',A:'Alberton',MS:'Mount Stewart',MR:'Murray River',S:'Summerside',Gt:'Georgetown',C:'Charlottetown'};
+function rshade(v){
+  const t=Math.max(-1,Math.min(1,(v-0.5)/0.11));
+  const base=t>=0?[46,110,107]:[125,59,84]; const a=Math.abs(t)*0.82;
+  return {bg:`rgba(${base.join(',')},${a.toFixed(3)})`, fg:a>0.45?'#F2F5F1':'var(--ink)'};
+}
+function railway(){
+  const blocks=DATA.railway;
+  let h='<table><thead><tr><th class="col" style="text-align:left"></th>'
+       +RORDER.map(c=>`<th class="col">${RCORP[c]}</th>`).join('')
+       +'<th class="col">Spread</th></tr></thead><tbody>';
+  for(const b of blocks){
+    const by={}; b.rows.forEach(r=>by[r.corp]=r);
+    h+=`<tr><td class="head">${esc(b.name)}<em>${b.kind==='main'?'MAINLINE':'SHORTLINE'} SHARE</em></td>`;
+    for(const c of RORDER){
+      const r=by[c];
+      if(!r){ h+='<td class="cell"><div style="opacity:.3">—</div></td>'; continue; }
+      const s=rshade(r.score);
+      h+=`<td class="cell" title="${esc(b.name)} when ${RCORP[c]} is the ${b.kind==='main'?'Mainline':'Shortline'}: finish ${r.score.toFixed(3)} \u00b1${r.ci.toFixed(3)}, paid $${r.price.toFixed(0)}, n=${r.n}">`
+        +`<div style="background:${s.bg};color:${s.fg}"><b>${r.score.toFixed(3)}</b><span>$${r.price.toFixed(0)}</span></div></td>`;
+    }
+    h+=`<td class="over" style="font-family:var(--mono);text-align:right;color:var(--dim)"><div>${b.spread.toFixed(3)}</div></td></tr>`;
+  }
+  $('#railway').innerHTML=h+'</tbody></table>';
+  const wide=blocks[0];
+  $('#railwayFind').innerHTML=`
+    <div class="finding"><h3>The market prices the private, not the railway behind it</h3>
+      <p>Outcomes swing by up to ${wide.spread.toFixed(3)} depending on which railway the attached share
+         belongs to — bigger than almost anything on the price sheet — while the price barely moves.
+         Nobody bids differently for a Mainline share of a strong railway versus a weak one, and by these
+         results they should.</p></div>
+    <div class="finding"><h3>A strong railway pays its president, not its minority holders</h3>
+      <p>The railways that reward their 20% president tend to punish the 10% shareholders in the same
+         games. Finishing order is zero-sum, so a company that concentrates its value in the presidency
+         necessarily costs everyone holding a small slice of it.</p></div>`;
+}
+
+/* ---- render / toggle ----------------------------------------------------- */
+function render(){
+  $('#fairnote').textContent = `fair share this view: ${FAIR().toFixed(0)}% (1 in ${MODE==='p3'?3:4})`;
+  $('#rdFair').textContent = `${FAIR().toFixed(0)}%`;
+  facts(); ladder(); priceTable(); delta(); winbars(); coord(); timing(); railway();
+  $('#foot').innerHTML =
+    `${fmt(DATA.meta.attribLots)} attributed lots that drew at least one bid, across `
+    +`${fmt(DATA.meta.games)} finished games, ${DATA.meta.from} to ${DATA.meta.to}. `
+    +`Currently showing ${MODE==='p3'?'3-player':'4-player'} games (${fmt(D().nGames)}). `
+    +`Undo and redo resolved before parsing; auction winners reconstructed from bid order. `
+    +`Lots nobody bid on are excluded from prices, since they transfer at face value and carry no `
+    +`decision. Coordination and company sections read holdings and starters straight from the log; `
+    +`the last panel pools both player counts on the 0.500 finish scale so its cells keep enough sample.`;
+}
+function setMode(m){
+  MODE=m;
+  $('#b3').setAttribute('aria-pressed', m==='p3');
+  $('#b4').setAttribute('aria-pressed', m==='p4');
+  render();
+}
+$('#b3').onclick=()=>setMode('p3');
+$('#b4').onclick=()=>setMode('p4');
+render();
+</script></body></html>

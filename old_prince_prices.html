@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Old Prince 1871 — What the Winners Paid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#DFE4DE; --card:#EAEEE8; --ink:#16211C; --dim:#5A6B60;
+  --rule:#A8B3AB; --brass:#9A6E1E; --flood:#2E6E6B; --ebb:#7D3B54;
+  --display:"Bitter",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+     font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px 96px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--brass);margin:0 0 10px}
+.masthead{padding:64px 0 26px;border-bottom:2px solid var(--ink)}
+.masthead h1{font-size:clamp(32px,5.4vw,54px);line-height:1.04}
+.masthead p{max-width:64ch;color:var(--dim);margin:18px 0 0}
+section{padding-top:64px}
+section > h2{font-size:clamp(22px,3.4vw,30px);margin-bottom:6px}
+.lede{color:var(--dim);max-width:68ch;margin:10px 0 26px}
+.note{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:16px;max-width:74ch;line-height:1.7}
+.strip{width:100%;display:block}
+.rowlabel{font-family:var(--body);font-size:13.5px;fill:var(--ink)}
+.rowmeta{font-family:var(--mono);font-size:11px;fill:var(--dim)}
+.axis{font-family:var(--mono);font-size:10.5px;fill:var(--dim);letter-spacing:.08em}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;margin-top:8px}
+thead th{text-align:right;font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);border-bottom:1px solid var(--ink);padding:0 0 8px 14px;white-space:nowrap}
+thead th:first-child{text-align:left;padding-left:0}
+tbody td{text-align:right;padding:8px 0 8px 14px;border-bottom:1px solid var(--rule)}
+tbody td:first-child{text-align:left;padding-left:0;font-family:var(--body);font-size:14px}
+tbody tr:hover{background:var(--card)}
+.pos{color:var(--flood)} .neg{color:var(--ebb)}
+.finding{border-left:3px solid var(--brass);padding:2px 0 2px 20px;margin:26px 0;max-width:72ch}
+.finding h3{font-size:17px;margin-bottom:6px}
+.finding p{margin:0;color:var(--dim);font-size:15px}
+
+/* the grid: privates down the side, railways across the top */
+.grid{margin-top:10px;overflow-x:auto}
+.grid table{font-size:12px;min-width:760px}
+.grid th.corp{writing-mode:horizontal-tb;text-align:center;padding:0 6px 8px;font-size:10px;line-height:1.25}
+.grid td.cell{text-align:center;padding:0;border-bottom:1px solid var(--paper)}
+.grid td.cell div{padding:9px 4px 7px;line-height:1.25}
+.grid td.cell b{display:block;font-weight:500;font-size:13px}
+.grid td.cell span{font-size:10px;opacity:.72}
+.grid td.lot{text-align:left;font-family:var(--body);font-size:13.5px;padding-right:14px;
+             border-bottom:1px solid var(--rule);white-space:nowrap}
+.grid td.lot em{display:block;font-style:normal;font-family:var(--mono);font-size:10px;color:var(--dim)}
+.grid td.spread{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right;padding-left:14px;
+                border-bottom:1px solid var(--rule);white-space:nowrap}
+.legend{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;
+        color:var(--dim);margin-top:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:26px;height:11px}
+footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--rule);
+       font-family:var(--mono);font-size:11.5px;color:var(--dim);line-height:1.8}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">18xx.games · companion view</p>
+  <h1>What the winners paid</h1>
+  <p>Every lot that drew at least one bid and could be attributed to a player, across
+     767 finished games. Two questions: do the players who go on to win pay less for a
+     given private, and does it matter <em>which</em> railway the private's share belongs to?</p>
+</header>
+
+<section>
+  <p class="eyebrow">Question one</p>
+  <h2>Winners pay less — barely</h2>
+  <p class="lede">The gap between what eventual winners paid and what everyone else paid,
+     per lot, with 95% confidence intervals. Sixteen of eighteen lots lean the same way,
+     which is hard to dismiss. But almost every bar's whisker crosses zero: in dollar terms
+     the discipline is worth two or three dollars a lot, not twenty.</p>
+  <div id="delta"></div>
+  <table id="priceTable"><thead></thead><tbody></tbody></table>
+  <p class="note" id="deltaNote"></p>
+</section>
+
+<section>
+  <p class="eyebrow">Question two</p>
+  <h2>The same price, a different railway</h2>
+  <p class="lede">Eight of the eleven privates come with a share of whichever company is
+     the Mainline or Shortline that game — and that company is drawn at random during setup.
+     Each cell is the buyer's average finish when the attached share belonged to that railway.
+     0.500 is neutral; the small figure is what they paid.</p>
+  <div class="grid" id="grid"></div>
+  <div class="legend">
+    <span>Buyer finished</span>
+    <i style="background:var(--ebb)"></i><span>worse</span>
+    <i style="background:var(--card)"></i><span>0.500</span>
+    <i style="background:var(--flood)"></i><span>better</span>
+    <span style="margin-left:auto">Cells need 15+ purchases; blanks are thinner than that.</span>
+  </div>
+  <div id="findings"></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<script>
+const D = {"chart1":[{"id":"UB","name":"Union Bank","face":120,"attach":"main","carries":"a 10% Mainline share on the bank charter","all":{"mean":141.8,"n":661,"ci":1.1},"win":{"mean":139.8,"n":236,"ci":1.7},"lose":{"mean":142.8,"n":425,"ci":1.5},"delta":-3.0,"deltaCi":2.3,"p90":160,"p90win":21.2},{"id":"HSE","name":"Hunslet Steam Engine","face":110,"attach":null,"carries":"no railway share","all":{"mean":125.4,"n":661,"ci":0.9},"win":{"mean":123.5,"n":210,"ci":1.5},"lose":{"mean":126.2,"n":451,"ci":1.1},"delta":-2.6,"deltaCi":1.9,"p90":140,"p90win":18.3},{"id":"IB","name":"Ice Boat Shipping","face":40,"attach":null,"carries":"one open-market share of the buyer\u2019s choice","all":{"mean":52.0,"n":266,"ci":0.9},"win":{"mean":50.4,"n":67,"ci":1.5},"lose":{"mean":52.5,"n":199,"ci":1.1},"delta":-2.1,"deltaCi":1.9,"p90":65,"p90win":0.0},{"id":"VR","name":"Vernon River Bridge","face":40,"attach":"short","carries":"a reserved 10% Shortline share","all":{"mean":53.1,"n":694,"ci":0.7},"win":{"mean":51.8,"n":235,"ci":1.1},"lose":{"mean":53.8,"n":459,"ci":0.9},"delta":-2.0,"deltaCi":1.4,"p90":65,"p90win":23.8},{"id":"SL","name":"Short Line Concession","face":160,"attach":"short","carries":"the Shortline's 20% president's certificate","all":{"mean":175.4,"n":650,"ci":0.8},"win":{"mean":174.2,"n":181,"ci":1.4},"lose":{"mean":175.9,"n":469,"ci":1.0},"delta":-1.8,"deltaCi":1.7,"p90":190,"p90win":22.7},{"id":"SBC","name":"Schreiber & Burpee","face":100,"attach":null,"carries":"no railway share","all":{"mean":114.1,"n":644,"ci":0.8},"win":{"mean":113.1,"n":211,"ci":1.4},"lose":{"mean":114.5,"n":433,"ci":1.0},"delta":-1.5,"deltaCi":1.7,"p90":130,"p90win":36.8},{"id":"P3","name":"PEIR Mount Stewart-3","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":87.0,"n":243,"ci":0.6},"win":{"mean":86.1,"n":60,"ci":0.7},"lose":{"mean":87.3,"n":183,"ci":0.8},"delta":-1.3,"deltaCi":1.1,"p90":90,"p90win":13.6},{"id":"RA","name":"Royal Agricultural Society","face":110,"attach":"main","carries":"a 10% Mainline share","all":{"mean":119.8,"n":594,"ci":0.5},"win":{"mean":118.9,"n":156,"ci":0.9},"lose":{"mean":120.1,"n":438,"ci":0.6},"delta":-1.2,"deltaCi":1.1,"p90":130,"p90win":12.5},{"id":"MC","name":"Merchants and Co.","face":40,"attach":"short","carries":"a reserved 10% Shortline share","all":{"mean":53.7,"n":710,"ci":0.7},"win":{"mean":52.9,"n":237,"ci":1.2},"lose":{"mean":54.1,"n":473,"ci":0.9},"delta":-1.2,"deltaCi":1.5,"p90":65,"p90win":25.0},{"id":"RF","name":"Railcar Ferry","face":120,"attach":"main","carries":"a 10% Mainline share","all":{"mean":129.8,"n":594,"ci":0.5},"win":{"mean":129.0,"n":178,"ci":0.9},"lose":{"mean":130.1,"n":416,"ci":0.6},"delta":-1.1,"deltaCi":1.1,"p90":140,"p90win":25.9},{"id":"P1","name":"PEIR Souris-1","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":87.6,"n":321,"ci":0.6},"win":{"mean":86.8,"n":96,"ci":0.8},"lose":{"mean":87.9,"n":225,"ci":0.8},"delta":-1.1,"deltaCi":1.1,"p90":95,"p90win":14.3},{"id":"ML","name":"Mainline Concession","face":160,"attach":"main","carries":"the Mainline's 20% president's certificate","all":{"mean":178.2,"n":659,"ci":0.9},"win":{"mean":177.4,"n":183,"ci":1.7},"lose":{"mean":178.5,"n":476,"ci":1.1},"delta":-1.0,"deltaCi":2.0,"p90":195,"p90win":20.9},{"id":"P2","name":"PEIR Alberton-2","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":86.7,"n":244,"ci":0.5},"win":{"mean":86.5,"n":68,"ci":0.9},"lose":{"mean":86.7,"n":176,"ci":0.7},"delta":-0.2,"deltaCi":1.1,"p90":90,"p90win":33.3},{"id":"P4","name":"PEIR Murray River-4","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":87.2,"n":219,"ci":0.8},"win":{"mean":87.1,"n":56,"ci":1.7},"lose":{"mean":87.3,"n":163,"ci":0.8},"delta":-0.2,"deltaCi":1.9,"p90":95,"p90win":16.7},{"id":"SB","name":"Shipbuilding","face":90,"attach":"short","carries":"a reserved 10% Shortline share","all":{"mean":99.2,"n":624,"ci":0.5},"win":{"mean":99.1,"n":171,"ci":0.9},"lose":{"mean":99.3,"n":453,"ci":0.6},"delta":-0.1,"deltaCi":1.1,"p90":110,"p90win":27.6},{"id":"P7","name":"PEIR Charlottetown-7","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":87.3,"n":252,"ci":0.6},"win":{"mean":87.3,"n":60,"ci":1.3},"lose":{"mean":87.3,"n":192,"ci":0.7},"delta":0.0,"deltaCi":1.5,"p90":95,"p90win":23.1},{"id":"P6","name":"PEIR Georgetown-6","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":86.2,"n":171,"ci":0.5},"win":{"mean":86.3,"n":39,"ci":0.9},"lose":{"mean":86.2,"n":132,"ci":0.6},"delta":0.1,"deltaCi":1.1,"p90":90,"p90win":33.3},{"id":"P5","name":"PEIR Summerside-5","face":80,"attach":"peir","carries":"the matching PEIR share","all":{"mean":87.2,"n":245,"ci":0.8},"win":{"mean":87.7,"n":71,"ci":1.3},"lose":{"mean":87.0,"n":174,"ci":0.9},"delta":0.7,"deltaCi":1.6,"p90":95,"p90win":45.5}],"chart2":[{"id":"RA","name":"Royal Agricultural Society","kind":"main","carries":"a 10% Mainline share","spreadOutcome":0.168,"spreadPrice":1.5,"rows":[{"corp":"So","corpName":"Souris","n":84,"price":{"mean":119.2,"n":84,"ci":1.4},"outcome":{"mean":0.558,"n":84,"ci":0.083}},{"corp":"S","corpName":"Summerside","n":88,"price":{"mean":120.2,"n":88,"ci":1.2},"outcome":{"mean":0.528,"n":88,"ci":0.074}},{"corp":"MR","corpName":"Murray River","n":88,"price":{"mean":120.6,"n":88,"ci":1.5},"outcome":{"mean":0.485,"n":88,"ci":0.086}},{"corp":"Gt","corpName":"Georgetown","n":90,"price":{"mean":120,"n":90,"ci":1.3},"outcome":{"mean":0.478,"n":90,"ci":0.083}},{"corp":"C","corpName":"Charlottetown","n":74,"price":{"mean":119.1,"n":74,"ci":1.3},"outcome":{"mean":0.468,"n":74,"ci":0.088}},{"corp":"A","corpName":"Alberton","n":91,"price":{"mean":119.2,"n":91,"ci":1.2},"outcome":{"mean":0.441,"n":91,"ci":0.078}},{"corp":"MS","corpName":"Mount Stewart","n":73,"price":{"mean":120.3,"n":73,"ci":1.7},"outcome":{"mean":0.39,"n":73,"ci":0.071}}]},{"id":"SL","name":"Short Line Concession","kind":"short","carries":"the Shortline's 20% president's certificate","spreadOutcome":0.163,"spreadPrice":4.2,"rows":[{"corp":"MR","corpName":"Murray River","n":83,"price":{"mean":173.4,"n":83,"ci":2.0},"outcome":{"mean":0.534,"n":83,"ci":0.092}},{"corp":"So","corpName":"Souris","n":78,"price":{"mean":174.6,"n":78,"ci":2.4},"outcome":{"mean":0.504,"n":78,"ci":0.087}},{"corp":"C","corpName":"Charlottetown","n":91,"price":{"mean":177.6,"n":91,"ci":2.4},"outcome":{"mean":0.495,"n":91,"ci":0.076}},{"corp":"Gt","corpName":"Georgetown","n":106,"price":{"mean":173.9,"n":106,"ci":1.7},"outcome":{"mean":0.478,"n":106,"ci":0.075}},{"corp":"S","corpName":"Summerside","n":87,"price":{"mean":177.0,"n":87,"ci":2.6},"outcome":{"mean":0.416,"n":87,"ci":0.086}},{"corp":"MS","corpName":"Mount Stewart","n":98,"price":{"mean":176.5,"n":98,"ci":2.2},"outcome":{"mean":0.412,"n":98,"ci":0.081}},{"corp":"A","corpName":"Alberton","n":98,"price":{"mean":174.4,"n":98,"ci":1.9},"outcome":{"mean":0.371,"n":98,"ci":0.079}}]},{"id":"UB","name":"Union Bank","kind":"main","carries":"a 10% Mainline share on the bank charter","spreadOutcome":0.127,"spreadPrice":4.2,"rows":[{"corp":"MR","corpName":"Murray River","n":101,"price":{"mean":140.5,"n":101,"ci":2.8},"outcome":{"mean":0.566,"n":101,"ci":0.081}},{"corp":"S","corpName":"Summerside","n":100,"price":{"mean":143.4,"n":100,"ci":2.7},"outcome":{"mean":0.55,"n":100,"ci":0.084}},{"corp":"A","corpName":"Alberton","n":97,"price":{"mean":144.0,"n":97,"ci":3.5},"outcome":{"mean":0.533,"n":97,"ci":0.082}},{"corp":"C","corpName":"Charlottetown","n":83,"price":{"mean":141.9,"n":83,"ci":3.3},"outcome":{"mean":0.52,"n":83,"ci":0.079}},{"corp":"Gt","corpName":"Georgetown","n":104,"price":{"mean":140.3,"n":104,"ci":2.7},"outcome":{"mean":0.513,"n":104,"ci":0.081}},{"corp":"So","corpName":"Souris","n":93,"price":{"mean":139.8,"n":93,"ci":2.6},"outcome":{"mean":0.511,"n":93,"ci":0.086}},{"corp":"MS","corpName":"Mount Stewart","n":77,"price":{"mean":142.5,"n":77,"ci":3.2},"outcome":{"mean":0.439,"n":77,"ci":0.088}}]},{"id":"ML","name":"Mainline Concession","kind":"main","carries":"the Mainline's 20% president's certificate","spreadOutcome":0.124,"spreadPrice":4.8,"rows":[{"corp":"MS","corpName":"Mount Stewart","n":75,"price":{"mean":178.6,"n":75,"ci":2.5},"outcome":{"mean":0.551,"n":75,"ci":0.086}},{"corp":"So","corpName":"Souris","n":97,"price":{"mean":178.1,"n":97,"ci":2.2},"outcome":{"mean":0.54,"n":97,"ci":0.078}},{"corp":"C","corpName":"Charlottetown","n":77,"price":{"mean":179.7,"n":77,"ci":2.6},"outcome":{"mean":0.53,"n":77,"ci":0.09}},{"corp":"MR","corpName":"Murray River","n":103,"price":{"mean":176.1,"n":103,"ci":2.2},"outcome":{"mean":0.471,"n":103,"ci":0.072}},{"corp":"Gt","corpName":"Georgetown","n":102,"price":{"mean":177.3,"n":102,"ci":1.9},"outcome":{"mean":0.451,"n":102,"ci":0.073}},{"corp":"S","corpName":"Summerside","n":99,"price":{"mean":180.9,"n":99,"ci":2.8},"outcome":{"mean":0.449,"n":99,"ci":0.083}},{"corp":"A","corpName":"Alberton","n":98,"price":{"mean":177.1,"n":98,"ci":2.3},"outcome":{"mean":0.427,"n":98,"ci":0.075}}]},{"id":"SB","name":"Shipbuilding","kind":"short","carries":"a reserved 10% Shortline share","spreadOutcome":0.104,"spreadPrice":2.5,"rows":[{"corp":"C","corpName":"Charlottetown","n":98,"price":{"mean":98.8,"n":98,"ci":1.3},"outcome":{"mean":0.522,"n":98,"ci":0.073}},{"corp":"S","corpName":"Summerside","n":87,"price":{"mean":99.1,"n":87,"ci":1.2},"outcome":{"mean":0.51,"n":87,"ci":0.08}},{"corp":"So","corpName":"Souris","n":75,"price":{"mean":99.1,"n":75,"ci":1.2},"outcome":{"mean":0.509,"n":75,"ci":0.092}},{"corp":"MR","corpName":"Murray River","n":77,"price":{"mean":99.0,"n":77,"ci":1.3},"outcome":{"mean":0.496,"n":77,"ci":0.088}},{"corp":"Gt","corpName":"Georgetown","n":99,"price":{"mean":98.0,"n":99,"ci":1.0},"outcome":{"mean":0.463,"n":99,"ci":0.071}},{"corp":"MS","corpName":"Mount Stewart","n":91,"price":{"mean":100.5,"n":91,"ci":1.5},"outcome":{"mean":0.462,"n":91,"ci":0.088}},{"corp":"A","corpName":"Alberton","n":91,"price":{"mean":100.1,"n":91,"ci":1.3},"outcome":{"mean":0.418,"n":91,"ci":0.082}}]},{"id":"MC","name":"Merchants and Co.","kind":"short","carries":"a reserved 10% Shortline share","spreadOutcome":0.089,"spreadPrice":3.5,"rows":[{"corp":"So","corpName":"Souris","n":93,"price":{"mean":52.4,"n":93,"ci":1.8},"outcome":{"mean":0.579,"n":93,"ci":0.079}},{"corp":"MR","corpName":"Murray River","n":84,"price":{"mean":53.5,"n":84,"ci":2.0},"outcome":{"mean":0.56,"n":84,"ci":0.079}},{"corp":"A","corpName":"Alberton","n":102,"price":{"mean":53.6,"n":102,"ci":1.9},"outcome":{"mean":0.547,"n":102,"ci":0.08}},{"corp":"MS","corpName":"Mount Stewart","n":111,"price":{"mean":54.3,"n":111,"ci":1.8},"outcome":{"mean":0.541,"n":111,"ci":0.071}},{"corp":"C","corpName":"Charlottetown","n":99,"price":{"mean":55.7,"n":99,"ci":2.1},"outcome":{"mean":0.54,"n":99,"ci":0.076}},{"corp":"Gt","corpName":"Georgetown","n":116,"price":{"mean":52.2,"n":116,"ci":1.4},"outcome":{"mean":0.491,"n":116,"ci":0.074}},{"corp":"S","corpName":"Summerside","n":97,"price":{"mean":53.3,"n":97,"ci":1.6},"outcome":{"mean":0.49,"n":97,"ci":0.08}}]},{"id":"VR","name":"Vernon River Bridge","kind":"short","carries":"a reserved 10% Shortline share","spreadOutcome":0.089,"spreadPrice":3.2,"rows":[{"corp":"So","corpName":"Souris","n":90,"price":{"mean":51.4,"n":90,"ci":1.6},"outcome":{"mean":0.583,"n":90,"ci":0.081}},{"corp":"S","corpName":"Summerside","n":92,"price":{"mean":53.5,"n":92,"ci":2.0},"outcome":{"mean":0.563,"n":92,"ci":0.075}},{"corp":"Gt","corpName":"Georgetown","n":110,"price":{"mean":51.5,"n":110,"ci":1.6},"outcome":{"mean":0.548,"n":110,"ci":0.074}},{"corp":"MS","corpName":"Mount Stewart","n":112,"price":{"mean":52.7,"n":112,"ci":1.8},"outcome":{"mean":0.542,"n":112,"ci":0.07}},{"corp":"C","corpName":"Charlottetown","n":102,"price":{"mean":54.6,"n":102,"ci":2.0},"outcome":{"mean":0.541,"n":102,"ci":0.076}},{"corp":"MR","corpName":"Murray River","n":78,"price":{"mean":54.0,"n":78,"ci":2.1},"outcome":{"mean":0.511,"n":78,"ci":0.092}},{"corp":"A","corpName":"Alberton","n":103,"price":{"mean":54.0,"n":103,"ci":1.7},"outcome":{"mean":0.494,"n":103,"ci":0.077}}]},{"id":"RF","name":"Railcar Ferry","kind":"main","carries":"a 10% Mainline share","spreadOutcome":0.058,"spreadPrice":1.9,"rows":[{"corp":"A","corpName":"Alberton","n":90,"price":{"mean":129.7,"n":90,"ci":1.3},"outcome":{"mean":0.533,"n":90,"ci":0.084}},{"corp":"MR","corpName":"Murray River","n":89,"price":{"mean":130.1,"n":89,"ci":1.5},"outcome":{"mean":0.522,"n":89,"ci":0.083}},{"corp":"C","corpName":"Charlottetown","n":70,"price":{"mean":130.6,"n":70,"ci":1.6},"outcome":{"mean":0.517,"n":70,"ci":0.091}},{"corp":"So","corpName":"Souris","n":84,"price":{"mean":129.5,"n":84,"ci":1.3},"outcome":{"mean":0.514,"n":84,"ci":0.08}},{"corp":"Gt","corpName":"Georgetown","n":89,"price":{"mean":129.2,"n":89,"ci":1.2},"outcome":{"mean":0.498,"n":89,"ci":0.083}},{"corp":"MS","corpName":"Mount Stewart","n":79,"price":{"mean":130.4,"n":79,"ci":1.6},"outcome":{"mean":0.479,"n":79,"ci":0.087}},{"corp":"S","corpName":"Summerside","n":87,"price":{"mean":128.7,"n":87,"ci":1.1},"outcome":{"mean":0.475,"n":87,"ci":0.079}}]}],"nLots":8452};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fmt = n => n.toLocaleString('en-US');
+
+/* ---- question one: the winner-minus-others gap ---- */
+function delta(){
+  const rows = D.chart1;
+  const W=1000, rowH=27, padL=230, padR=120, top=44, H=top+rows.length*rowH+12;
+  const lim = 5.5;
+  const px = v => padL + ((Math.max(-lim,Math.min(lim,v))+lim)/(2*lim))*(W-padL-padR);
+  let s=`<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Price gap between winners and other buyers, by lot">`;
+  for(const t of [-4,-2,0,2,4]){
+    s+=`<line x1="${px(t)}" y1="${top-14}" x2="${px(t)}" y2="${H-8}" stroke="${t===0?'var(--ink)':'var(--rule)'}" stroke-width="${t===0?1:.5}"/>`;
+    s+=`<text class="axis" x="${px(t)}" y="${top-22}" text-anchor="middle">${t>0?'+':''}${t===0?'$0':'$'+t}</text>`;
+  }
+  s+=`<text class="axis" x="${padL}" y="${top-22}">WINNERS PAID LESS</text>`;
+  s+=`<text class="axis" x="${W-padR}" y="${top-22}" text-anchor="end">PAID MORE</text>`;
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+10, a=px(0), b=px(r.delta);
+    const sig = Math.abs(r.delta) > r.deltaCi;
+    s+=`<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    s+=`<rect x="${Math.min(a,b)}" y="${y-6}" width="${Math.abs(b-a)}" height="12"
+          fill="${r.delta<0?'var(--flood)':'var(--ebb)'}" opacity="${sig?'.9':'.4'}"/>`;
+    s+=`<line x1="${px(r.delta-r.deltaCi)}" y1="${y}" x2="${px(r.delta+r.deltaCi)}" y2="${y}" stroke="var(--ink)" stroke-width="1"/>`;
+    s+=`<text class="rowmeta" x="${W-padR+10}" y="${y+4}">${r.delta>0?'+':''}$${r.delta.toFixed(1)} ±${r.deltaCi.toFixed(1)}</text>`;
+    s+=`<title>${esc(r.name)}: winners $${r.win.mean} (n=${r.win.n}), others $${r.lose.mean} (n=${r.lose.n})</title>`;
+  });
+  $('#delta').innerHTML = s+'</svg>';
+  const solid = rows.filter(r=>Math.abs(r.delta)>r.deltaCi);
+  $('#deltaNote').textContent =
+    `Only ${solid.length} of ${rows.length} lots clear their own confidence interval: `
+    + solid.map(r=>r.name).join(', ') + '. '
+    + 'Solid bars clear it; faded bars do not. The averages hide the effect because most lots '
+    + 'sell within $5 of the opening bid — overpaying is rare, and when it happens it happens '
+    + 'in the tail rather than the middle.';
+}
+
+const COLS = [
+  ['Lot',        r=>esc(r.name)],
+  ['Face',       r=>'$'+r.face],
+  ['Carries',    r=>`<span style="font-family:var(--body);font-size:12.5px">${esc(r.carries)}</span>`],
+  ['All buyers', r=>'$'+r.all.mean.toFixed(0)],
+  ['Winners',    r=>'$'+r.win.mean.toFixed(0)],
+  ['Others',     r=>'$'+r.lose.mean.toFixed(0)],
+  ['Gap',        r=>`<span class="${r.delta<0?'pos':'neg'}">${r.delta>0?'+':''}$${r.delta.toFixed(1)}</span>`],
+  ['Lots',       r=>fmt(r.all.n)],
+];
+function priceTable(){
+  const rows = D.chart1.slice().sort((a,b)=>b.all.mean-a.all.mean);
+  $('#priceTable thead').innerHTML='<tr>'+COLS.map(([l])=>`<th>${l}</th>`).join('')+'</tr>';
+  $('#priceTable tbody').innerHTML=rows.map(r=>'<tr>'+COLS.map(([,f])=>`<td>${f(r)}</td>`).join('')+'</tr>').join('');
+}
+
+/* ---- question two: outcome by which railway the share belongs to ---- */
+const ORDER = ['So','A','MS','MR','S','Gt','C'];
+const CORPN = {So:'Souris',A:'Alberton',MS:'Mount Stewart',MR:'Murray River',
+               S:'Summerside',Gt:'Georgetown',C:'Charlottetown'};
+function shade(v){
+  const t = Math.max(-1, Math.min(1, (v-0.5)/0.11));
+  const base = t>=0 ? [46,110,107] : [125,59,84];
+  const a = Math.abs(t)*0.82;
+  return {bg:`rgba(${base.join(',')},${a.toFixed(3)})`, fg: a>0.45?'#F2F5F1':'var(--ink)'};
+}
+function grid(){
+  const blocks = D.chart2;
+  let h = '<table><thead><tr><th></th>'
+        + ORDER.map(c=>`<th class="corp">${CORPN[c]}</th>`).join('')
+        + '<th style="text-align:right">Spread</th></tr></thead><tbody>';
+  for(const b of blocks){
+    const by = {}; b.rows.forEach(r=>by[r.corp]=r);
+    h += `<tr><td class="lot">${esc(b.name)}<em>${b.kind==='main'?'MAINLINE':'SHORTLINE'} SHARE</em></td>`;
+    for(const c of ORDER){
+      const r = by[c];
+      if(!r){ h += '<td class="cell"><div style="opacity:.35">—</div></td>'; continue; }
+      const s = shade(r.outcome.mean);
+      h += `<td class="cell" title="${esc(b.name)} when ${CORPN[c]} is the ${b.kind==='main'?'Mainline':'Shortline'}: `
+         + `finish ${r.outcome.mean.toFixed(3)} ±${r.outcome.ci.toFixed(3)}, paid $${r.price.mean.toFixed(0)}, n=${r.n}">`
+         + `<div style="background:${s.bg};color:${s.fg}"><b>${r.outcome.mean.toFixed(3)}</b>`
+         + `<span>$${r.price.mean.toFixed(0)}</span></div></td>`;
+    }
+    h += `<td class="spread">${b.spreadOutcome.toFixed(3)}<br>$${b.spreadPrice.toFixed(0)}</td></tr>`;
+  }
+  $('#grid').innerHTML = h + '</tbody></table>';
+
+  const wide = blocks[0];
+  $('#findings').innerHTML = `
+    <div class="finding"><h3>The market prices the private, not the railway</h3>
+      <p>Down the Spread column, the top figure is how far the buyer's finish moves depending on
+         which railway the share belongs to; the bottom figure is how far the price moves.
+         Outcomes swing by up to ${wide.spreadOutcome.toFixed(3)} — larger than any effect on the main
+         dashboard — while prices move by ${'$'+wide.spreadPrice.toFixed(0)} or less. Nobody is
+         bidding differently for a Mainline share in Souris than for one in Alberton, and the
+         results say they should.</p></div>
+    <div class="finding"><h3>Alberton is the railway to fade</h3>
+      <p>Alberton sits at or near the bottom of the Shortline Concession, Shipbuilding, Royal
+         Agricultural Society and Mainline Concession rows. The Short Line Concession with
+         Alberton as the Shortline is the single worst cell on the board at 0.371.</p></div>
+    <div class="finding"><h3>A strong railway pays its president, not its shareholders</h3>
+      <p>Mount Stewart is the best Mainline to hold the president's certificate of (0.551) and one
+         of the worst to hold a minority share of — Royal Agricultural Society drops to 0.390 and
+         the Union Bank to 0.439 in those same games. Souris is the exception that rewards
+         everyone holding its paper. Finishing position is zero-sum, so a railway that concentrates
+         its value in the 20% certificate necessarily costs the 10% holders.</p></div>
+    <div class="finding"><h3>Sample sizes are the limit here</h3>
+      <p>Each cell rests on 70 to 115 purchases, so a typical confidence interval is about
+         ±0.08 — roughly the width of the whole Railcar Ferry row. Read the column patterns,
+         which repeat across independent rows, rather than any individual cell.</p></div>`;
+}
+
+delta(); priceTable(); grid();
+$('#foot').innerHTML =
+  `${fmt(D.nLots)} attributed lots that drew at least one bid, from 767 finished games, `
+  + `2025-07-26 to 2026-07-25. Lots that nobody bid on are excluded, since they transfer at face `
+  + `value and carry no decision. The Mainline and Shortline are identified as the two PEIR `
+  + `companies seeded at setup rather than floated by a par action, validated against three `
+  + `hand-checked transcripts.`;
+</script></body></html>

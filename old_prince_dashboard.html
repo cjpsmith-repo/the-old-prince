@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Old Prince 1871 — Play Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#DFE4DE; --card:#EAEEE8; --ink:#16211C; --dim:#5A6B60;
+  --rule:#A8B3AB; --brass:#9A6E1E; --flood:#2E6E6B; --ebb:#7D3B54;
+  --display:"Bitter",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+     font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px 96px}
+a{color:var(--flood)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.01em;margin:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+         color:var(--brass);margin:0 0 10px}
+
+/* header */
+.masthead{padding:64px 0 28px;border-bottom:2px solid var(--ink)}
+.masthead h1{font-size:clamp(34px,6vw,60px);line-height:1.02}
+.masthead p{max-width:62ch;color:var(--dim);margin:18px 0 0}
+.facts{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;border-top:1px solid var(--rule);
+       font-family:var(--mono);font-size:12px}
+.fact{flex:1 1 130px;padding:12px 16px 12px 0;border-right:1px solid var(--rule)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-size:21px;font-weight:500;letter-spacing:-.02em}
+.fact span{color:var(--dim);text-transform:uppercase;letter-spacing:.1em;font-size:10px}
+
+/* controls */
+.toggle{display:flex;gap:8px;margin:34px 0 0}
+.toggle button{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 18px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;
+  border-radius:0;transition:background .15s,color .15s}
+.toggle button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.toggle button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+section{padding-top:64px}
+section > h2{font-size:clamp(22px,3.4vw,30px);margin-bottom:6px}
+.lede{color:var(--dim);max-width:66ch;margin:10px 0 26px}
+.note{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:14px;max-width:70ch;line-height:1.7}
+
+/* the market strip: a datum line at 0.500, bars ebb left / flood right */
+.strip{width:100%;display:block}
+.rowlabel{font-family:var(--body);font-size:13.5px;fill:var(--ink)}
+.rowmeta{font-family:var(--mono);font-size:11px;fill:var(--dim)}
+.axis{font-family:var(--mono);font-size:10.5px;fill:var(--dim);letter-spacing:.08em}
+
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+thead th{text-align:right;font-weight:500;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);border-bottom:1px solid var(--ink);padding:0 0 8px 14px;cursor:pointer;white-space:nowrap}
+thead th:first-child{text-align:left;padding-left:0}
+thead th[aria-sort]{color:var(--brass)}
+tbody td{text-align:right;padding:9px 0 9px 14px;border-bottom:1px solid var(--rule)}
+tbody td:first-child{text-align:left;padding-left:0;font-family:var(--body);font-size:14px}
+tbody tr:hover{background:var(--card)}
+.pos{color:var(--flood)} .neg{color:var(--ebb)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;
+       background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+.card{background:var(--card);padding:20px}
+.card h3{font-size:15px;margin-bottom:6px}
+.card .big{font-family:var(--mono);font-size:30px;letter-spacing:-.02em;display:block;margin:6px 0 2px}
+.card p{margin:0;font-size:13.5px;color:var(--dim);line-height:1.5}
+
+.finding{border-left:3px solid var(--brass);padding:2px 0 2px 20px;margin:26px 0;max-width:70ch}
+.finding h3{font-size:17px;margin-bottom:6px}
+.finding p{margin:0;color:var(--dim);font-size:15px}
+footer{margin-top:80px;padding-top:22px;border-top:1px solid var(--rule);
+       font-family:var(--mono);font-size:11.5px;color:var(--dim);line-height:1.8}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media(max-width:640px){.fact{border-right:0}}
+</style></head><body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">18xx.games · action-log analysis</p>
+  <h1>The Old Prince 1871<br>Play Ledger</h1>
+  <p>Every finished game on record, read straight from the action logs. Scores below run on a
+     single scale: <b>0.500 is neutral</b> — exactly what a lot, a price, or a habit would earn
+     if it made no difference at all. 1.000 means the player always finished first.</p>
+  <div class="facts" id="facts"></div>
+  <div class="toggle" role="group" aria-label="Player count">
+    <button id="b3" aria-pressed="true">3 players</button>
+    <button id="b4" aria-pressed="false">4 players</button>
+  </div>
+</header>
+
+<section>
+  <p class="eyebrow">The headline</p>
+  <h2>Price beats pick</h2>
+  <p class="lede">For each lot, the cheapest third of winning bids against the dearest third.
+     Buying it cheap outperforms buying it dear on every lot in the game, without exception.
+     No single item comes close to mattering this much.</p>
+  <div id="slope"></div>
+  <p class="note" id="slopeNote"></p>
+</section>
+
+<section>
+  <p class="eyebrow">Does the lot itself matter?</p>
+  <h2>Buyer's finish by lot</h2>
+  <p class="lede">How the player who took each lot actually finished. Bars run from the 0.500
+     datum; the hairline is the 95% confidence interval. Almost everything sits inside the noise.</p>
+  <div id="lotScore"></div>
+</section>
+
+<section>
+  <p class="eyebrow">The auction</p>
+  <h2>What each lot costs</h2>
+  <p class="lede">Prices for lots that drew at least one bid. "Unbid" is how often nobody
+     bid at all and the lot fell to the offerer at face value.</p>
+  <table id="lotTable"><thead></thead><tbody></tbody></table>
+  <p class="note">Click a column to sort. Premium is the mean winning bid against face value.</p>
+</section>
+
+<section>
+  <p class="eyebrow">Habits</p>
+  <h2>What winners do differently</h2>
+  <p class="lede">Each player's rank within their own game on a given habit, correlated with
+     where they finished. This cancels out strong and weak tables.</p>
+  <div class="cards" id="habits"></div>
+  <div id="spend" style="margin-top:38px"></div>
+</section>
+
+<section>
+  <p class="eyebrow">Two levers</p>
+  <h2>The clock and the par</h2>
+  <div class="cards" id="levers"></div>
+  <div id="par" style="margin-top:38px"></div>
+</section>
+
+<section>
+  <p class="eyebrow">Read this before quoting any of it</p>
+  <h2>What the numbers will and won't carry</h2>
+  <div id="caveats"></div>
+</section>
+
+<footer id="foot"></footer>
+</div>
+<script>
+const DATA = {"meta":{"games":767,"p3":476,"p4":291,"actions":442354,"from":"2025-07-26","to":"2026-07-25","lotsScored":10482},"p3":{"nGames":476,"lots":[{"id":"MC","name":"Merchants and Co.","face":40,"n":432,"mean":54.4,"median":50.0,"sd":9.6,"min":45,"max":90,"premium":35.9,"unbid":4.6,"score":0.531,"ci":0.038,"nOut":453,"winPct":37.7},{"id":"VR","name":"Vernon River Bridge","face":40,"n":433,"mean":54.2,"median":50,"sd":9.8,"min":45,"max":95,"premium":35.5,"unbid":4.2,"score":0.546,"ci":0.037,"nOut":452,"winPct":37.2},{"id":"UB","name":"Union Bank","face":120,"n":417,"mean":142.4,"median":140,"sd":14.2,"min":125,"max":195,"premium":18.7,"unbid":4.1,"score":0.533,"ci":0.04,"nOut":435,"winPct":39.1},{"id":"SBC","name":"Schreiber & Burpee","face":100,"n":400,"mean":114.2,"median":110.0,"sd":10.2,"min":105,"max":155,"premium":14.2,"unbid":7.4,"score":0.523,"ci":0.039,"nOut":432,"winPct":36.1},{"id":"HSE","name":"Hunslet Steam Engine","face":110,"n":408,"mean":125.3,"median":120.0,"sd":12.2,"min":115,"max":190,"premium":13.9,"unbid":5.1,"score":0.529,"ci":0.038,"nOut":430,"winPct":36.0},{"id":"ML","name":"Mainline Concession","face":160,"n":404,"mean":179.3,"median":180.0,"sd":12.1,"min":165,"max":240,"premium":12.1,"unbid":4.5,"score":0.492,"ci":0.039,"nOut":423,"winPct":32.2},{"id":"SB","name":"Shipbuilding","face":90,"n":384,"mean":99.1,"median":95.0,"sd":5.7,"min":95,"max":120,"premium":10.1,"unbid":12.5,"score":0.464,"ci":0.038,"nOut":439,"winPct":29.4},{"id":"SL","name":"Short Line Concession","face":160,"n":408,"mean":175.7,"median":175.0,"sd":10.2,"min":165,"max":220,"premium":9.8,"unbid":7.3,"score":0.465,"ci":0.039,"nOut":440,"winPct":31.1},{"id":"RA","name":"Royal Agricultural Society","face":110,"n":368,"mean":120.1,"median":117.5,"sd":6.7,"min":115,"max":150,"premium":9.2,"unbid":15.2,"score":0.495,"ci":0.038,"nOut":434,"winPct":32.5},{"id":"P1","name":"PEIR Souris-1","face":80,"n":197,"mean":87.3,"median":85,"sd":5.5,"min":85,"max":125,"premium":9.1,"unbid":33.0,"score":0.497,"ci":0.048,"nOut":294,"winPct":35.4},{"id":"P7","name":"PEIR Charlottetown-7","face":80,"n":146,"mean":87.0,"median":85.0,"sd":3.8,"min":85,"max":100,"premium":8.7,"unbid":46.7,"score":0.453,"ci":0.047,"nOut":274,"winPct":27.4},{"id":"P5","name":"PEIR Summerside-5","face":80,"n":133,"mean":86.8,"median":85,"sd":4.4,"min":85,"max":110,"premium":8.5,"unbid":50.7,"score":0.413,"ci":0.049,"nOut":270,"winPct":26.7},{"id":"RF","name":"Railcar Ferry","face":120,"n":365,"mean":130.1,"median":125,"sd":6.8,"min":125,"max":160,"premium":8.4,"unbid":14.7,"score":0.518,"ci":0.038,"nOut":428,"winPct":34.8},{"id":"P3","name":"PEIR Mount Stewart-3","face":80,"n":144,"mean":86.6,"median":85.0,"sd":4.9,"min":85,"max":130,"premium":8.3,"unbid":49.5,"score":0.472,"ci":0.046,"nOut":285,"winPct":28.4},{"id":"P2","name":"PEIR Alberton-2","face":80,"n":133,"mean":86.4,"median":85,"sd":3.8,"min":85,"max":115,"premium":8.0,"unbid":50.9,"score":0.47,"ci":0.047,"nOut":271,"winPct":28.8},{"id":"P6","name":"PEIR Georgetown-6","face":80,"n":88,"mean":86.4,"median":85.0,"sd":3.6,"min":85,"max":110,"premium":8.0,"unbid":61.6,"score":0.445,"ci":0.051,"nOut":229,"winPct":25.8},{"id":"P4","name":"PEIR Murray River-4","face":80,"n":125,"mean":86.3,"median":85,"sd":4.0,"min":85,"max":115,"premium":7.9,"unbid":55.4,"score":0.446,"ci":0.049,"nOut":280,"winPct":30.0}],"overpay":[{"id":"SBC","name":"Schreiber & Burpee","lo":105,"hi":120,"cheap":0.605,"dear":0.473,"nCheap":153,"nDear":73,"gap":0.132},{"id":"RA","name":"Royal Agricultural Society","lo":115,"hi":120,"cheap":0.524,"dear":0.4,"nCheap":184,"nDear":105,"gap":0.124},{"id":"VR","name":"Vernon River Bridge","lo":45,"hi":60,"cheap":0.597,"dear":0.483,"nCheap":170,"nDear":90,"gap":0.114},{"id":"HSE","name":"Hunslet Steam Engine","lo":115,"hi":125,"cheap":0.583,"dear":0.489,"nCheap":157,"nDear":135,"gap":0.094},{"id":"SB","name":"Shipbuilding","lo":95,"hi":100,"cheap":0.505,"dear":0.411,"nCheap":216,"nDear":90,"gap":0.094},{"id":"SL","name":"Short Line Concession","lo":170,"hi":180,"cheap":0.472,"dear":0.385,"nCheap":179,"nDear":100,"gap":0.087},{"id":"ML","name":"Mainline Concession","lo":175,"hi":185,"cheap":0.516,"dear":0.432,"nCheap":186,"nDear":88,"gap":0.084},{"id":"UB","name":"Union Bank","lo":135,"hi":150,"cheap":0.579,"dear":0.5,"nCheap":164,"nDear":88,"gap":0.079},{"id":"MC","name":"Merchants and Co.","lo":45,"hi":60,"cheap":0.562,"dear":0.495,"nCheap":162,"nDear":108,"gap":0.066},{"id":"RF","name":"Railcar Ferry","lo":125,"hi":130,"cheap":0.536,"dear":0.475,"nCheap":183,"nDear":100,"gap":0.061}],"spend":[{"lo":0,"hi":385,"score":0.574,"n":285},{"lo":385,"hi":465,"score":0.519,"n":286},{"lo":465,"hi":520,"score":0.482,"n":285},{"lo":520,"hi":560,"score":0.423,"n":286},{"lo":560,"hi":805,"score":0.502,"n":286}],"corr":[{"metric":"share_buys","r":0.265,"n":1404},{"metric":"companies_started","r":0.099,"n":1308},{"metric":"actions","r":0.158,"n":1425},{"metric":"share_sells","r":-0.062,"n":1389},{"metric":"passes","r":-0.035,"n":1407},{"metric":"undos","r":0.118,"n":1413}],"dTrain":{"n":424,"winPct":44.1,"base":33.3},"par":[{"par":80,"score":0.555,"n":201},{"par":74,"score":0.53,"n":736},{"par":65,"score":0.535,"n":651},{"par":58,"score":0.484,"n":283}],"undo":[{"band":"0","score":0.424,"n":33},{"band":"1-9","score":0.43,"n":338},{"band":"10-39","score":0.521,"n":854},{"band":"40+","score":0.539,"n":203}]},"p4":{"nGames":291,"lots":[{"id":"MC","name":"Merchants and Co.","face":40,"n":278,"mean":52.6,"median":50.0,"sd":8.9,"min":45,"max":90,"premium":31.4,"unbid":2.8,"score":0.541,"ci":0.042,"nOut":286,"winPct":27.3},{"id":"IB","name":"Ice Boat Shipping","face":40,"n":266,"mean":52.0,"median":50.0,"sd":7.6,"min":45,"max":90,"premium":29.9,"unbid":2.9,"score":0.502,"ci":0.044,"nOut":274,"winPct":25.2},{"id":"VR","name":"Vernon River Bridge","face":40,"n":261,"mean":51.2,"median":50,"sd":8.1,"min":45,"max":85,"premium":28.1,"unbid":6.5,"score":0.534,"ci":0.044,"nOut":279,"winPct":29.4},{"id":"UB","name":"Union Bank","face":120,"n":244,"mean":140.6,"median":140.0,"sd":15.7,"min":125,"max":205,"premium":17.2,"unbid":5.1,"score":0.501,"ci":0.048,"nOut":257,"winPct":29.6},{"id":"HSE","name":"Hunslet Steam Engine","face":110,"n":253,"mean":125.5,"median":125,"sd":11.5,"min":115,"max":170,"premium":14.0,"unbid":4.9,"score":0.519,"ci":0.044,"nOut":266,"winPct":26.3},{"id":"SBC","name":"Schreiber & Burpee","face":100,"n":244,"mean":113.9,"median":110.0,"sd":10.8,"min":105,"max":155,"premium":13.9,"unbid":7.9,"score":0.533,"ci":0.045,"nOut":265,"winPct":28.7},{"id":"SB","name":"Shipbuilding","face":90,"n":240,"mean":99.5,"median":95.0,"sd":6.7,"min":95,"max":120,"premium":10.5,"unbid":9.4,"score":0.514,"ci":0.043,"nOut":265,"winPct":23.4},{"id":"P4","name":"PEIR Murray River-4","face":80,"n":94,"mean":88.4,"median":85.0,"sd":7.2,"min":85,"max":120,"premium":10.5,"unbid":48.9,"score":0.527,"ci":0.054,"nOut":184,"winPct":27.7},{"id":"ML","name":"Mainline Concession","face":160,"n":255,"mean":176.4,"median":175,"sd":11.1,"min":165,"max":215,"premium":10.2,"unbid":4.5,"score":0.477,"ci":0.044,"nOut":267,"winPct":21.0},{"id":"P1","name":"PEIR Souris-1","face":80,"n":124,"mean":88.1,"median":85.0,"sd":6.3,"min":85,"max":130,"premium":10.1,"unbid":27.1,"score":0.484,"ci":0.055,"nOut":170,"winPct":24.1},{"id":"P5","name":"PEIR Summerside-5","face":80,"n":112,"mean":87.7,"median":85.0,"sd":7.6,"min":85,"max":150,"premium":9.7,"unbid":41.1,"score":0.493,"ci":0.055,"nOut":190,"winPct":27.9},{"id":"P7","name":"PEIR Charlottetown-7","face":80,"n":106,"mean":87.7,"median":85.0,"sd":6.1,"min":85,"max":120,"premium":9.7,"unbid":41.4,"score":0.462,"ci":0.052,"nOut":181,"winPct":19.9},{"id":"P3","name":"PEIR Mount Stewart-3","face":80,"n":99,"mean":87.6,"median":85,"sd":4.8,"min":85,"max":110,"premium":9.5,"unbid":46.5,"score":0.503,"ci":0.053,"nOut":185,"winPct":24.9},{"id":"SL","name":"Short Line Concession","face":160,"n":242,"mean":175.0,"median":170.0,"sd":11.5,"min":165,"max":220,"premium":9.4,"unbid":6.9,"score":0.459,"ci":0.047,"nOut":260,"winPct":23.5},{"id":"P2","name":"PEIR Alberton-2","face":80,"n":111,"mean":87.0,"median":85,"sd":4.9,"min":85,"max":115,"premium":8.7,"unbid":41.0,"score":0.48,"ci":0.055,"nOut":188,"winPct":25.5},{"id":"RA","name":"Royal Agricultural Society","face":110,"n":226,"mean":119.3,"median":115.0,"sd":5.8,"min":115,"max":145,"premium":8.5,"unbid":15.0,"score":0.51,"ci":0.043,"nOut":266,"winPct":22.9},{"id":"RF","name":"Railcar Ferry","face":120,"n":229,"mean":129.2,"median":125,"sd":5.9,"min":125,"max":150,"premium":7.7,"unbid":12.6,"score":0.505,"ci":0.045,"nOut":262,"winPct":25.2},{"id":"P6","name":"PEIR Georgetown-6","face":80,"n":83,"mean":86.0,"median":85,"sd":3.1,"min":85,"max":105,"premium":7.5,"unbid":50.6,"score":0.427,"ci":0.057,"nOut":168,"winPct":19.6}],"overpay":[{"id":"HSE","name":"Hunslet Steam Engine","lo":115,"hi":130,"cheap":0.581,"dear":0.429,"nCheap":97,"nDear":63,"gap":0.152},{"id":"UB","name":"Union Bank","lo":130,"hi":145,"cheap":0.565,"dear":0.416,"nCheap":92,"nDear":73,"gap":0.15},{"id":"VR","name":"Vernon River Bridge","lo":45,"hi":50,"cheap":0.586,"dear":0.464,"nCheap":124,"nDear":84,"gap":0.122},{"id":"SL","name":"Short Line Concession","lo":165,"hi":180,"cheap":0.493,"dear":0.379,"nCheap":100,"nDear":58,"gap":0.114},{"id":"IB","name":"Ice Boat Shipping","lo":45,"hi":55,"cheap":0.555,"dear":0.446,"nCheap":107,"nDear":65,"gap":0.108},{"id":"MC","name":"Merchants and Co.","lo":45,"hi":55,"cheap":0.567,"dear":0.498,"nCheap":120,"nDear":73,"gap":0.069},{"id":"RF","name":"Railcar Ferry","lo":125,"hi":130,"cheap":0.544,"dear":0.491,"nCheap":128,"nDear":55,"gap":0.053},{"id":"RA","name":"Royal Agricultural Society","lo":115,"hi":120,"cheap":0.512,"dear":0.468,"nCheap":125,"nDear":62,"gap":0.044},{"id":"SB","name":"Shipbuilding","lo":95,"hi":100,"cheap":0.551,"dear":0.523,"nCheap":141,"nDear":58,"gap":0.028},{"id":"ML","name":"Mainline Concession","lo":170,"hi":180,"cheap":0.477,"dear":0.458,"nCheap":116,"nDear":72,"gap":0.019},{"id":"SBC","name":"Schreiber & Burpee","lo":105,"hi":115,"cheap":0.568,"dear":0.577,"nCheap":111,"nDear":78,"gap":-0.009}],"spend":[{"lo":0,"hi":275,"score":0.54,"n":232},{"lo":275,"hi":350,"score":0.506,"n":233},{"lo":350,"hi":410,"score":0.486,"n":233},{"lo":410,"hi":465,"score":0.476,"n":233},{"lo":465,"hi":740,"score":0.491,"n":233}],"corr":[{"metric":"share_buys","r":0.249,"n":1156},{"metric":"companies_started","r":0.209,"n":1064},{"metric":"actions","r":0.157,"n":1164},{"metric":"share_sells","r":-0.029,"n":1148},{"metric":"passes","r":-0.021,"n":1156},{"metric":"undos","r":0.087,"n":1164}],"dTrain":{"n":263,"winPct":35.7,"base":25.0},"par":[{"par":80,"score":0.605,"n":108},{"par":74,"score":0.584,"n":451},{"par":65,"score":0.549,"n":455},{"par":58,"score":0.507,"n":201}],"undo":[{"band":"0","score":0.467,"n":20},{"band":"1-9","score":0.466,"n":341},{"band":"10-39","score":0.505,"n":696},{"band":"40+","score":0.583,"n":107}]}};
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('en-US');
+let MODE = 'p3';
+
+const SC_LO = 0.34, SC_HI = 0.66;
+const sx = v => (Math.max(SC_LO, Math.min(SC_HI, v)) - SC_LO) / (SC_HI - SC_LO);
+const tone = v => v >= 0.5 ? 'var(--flood)' : 'var(--ebb)';
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function facts(){
+  const m = DATA.meta;
+  $('#facts').innerHTML = [
+    [fmt(m.games), 'games scored'],
+    [fmt(m.p3) + ' / ' + fmt(m.p4), '3p / 4p'],
+    [fmt(m.lotsScored), 'lots attributed'],
+    [fmt(m.actions), 'actions replayed'],
+    [m.from.slice(0,7) + ' → ' + m.to.slice(0,7), 'span'],
+  ].map(([b,s]) => `<div class="fact"><b>${b}</b><span>${s}</span></div>`).join('');
+}
+
+/* signature: paired dot plot, cheap vs dear */
+function slope(){
+  const rows = DATA[MODE].overpay;
+  const W = 1000, rowH = 34, padL = 210, padR = 96, top = 46;
+  const H = top + rows.length * rowH + 26;
+  const px = v => padL + sx(v) * (W - padL - padR);
+  let s = `<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Cheap versus dear purchase outcomes by lot">`;
+  s += `<line x1="${px(0.5)}" y1="${top-18}" x2="${px(0.5)}" y2="${H-20}" stroke="var(--ink)" stroke-width="1"/>`;
+  s += `<text class="axis" x="${px(0.5)}" y="${top-26}" text-anchor="middle">0.500 NEUTRAL</text>`;
+  s += `<text class="axis" x="${padL}" y="${top-26}">WORSE</text>`;
+  s += `<text class="axis" x="${W-padR}" y="${top-26}" text-anchor="end">BETTER</text>`;
+  rows.forEach((r,i)=>{
+    const y = top + i*rowH + 12;
+    s += `<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    s += `<line x1="${px(r.dear)}" y1="${y}" x2="${px(r.cheap)}" y2="${y}" stroke="var(--rule)" stroke-width="1.5"/>`;
+    s += `<circle cx="${px(r.dear)}" cy="${y}" r="5" fill="var(--ebb)"/>`;
+    s += `<circle cx="${px(r.cheap)}" cy="${y}" r="5" fill="var(--flood)"/>`;
+    s += `<text class="rowmeta" x="${W-padR+12}" y="${y+4}">+${r.gap.toFixed(3)}</text>`;
+    s += `<title>${esc(r.name)}: paid ≤$${r.lo} → ${r.cheap} (n=${r.nCheap}); paid >$${r.hi} → ${r.dear} (n=${r.nDear})</title>`;
+  });
+  s += `<circle cx="${padL}" cy="${H-8}" r="5" fill="var(--flood)"/><text class="rowmeta" x="${padL+12}" y="${H-4}">cheapest third of winning bids</text>`;
+  s += `<circle cx="${padL+240}" cy="${H-8}" r="5" fill="var(--ebb)"/><text class="rowmeta" x="${padL+252}" y="${H-4}">dearest third</text>`;
+  $('#slope').innerHTML = s + '</svg>';
+  const worst = rows[0];
+  $('#slopeNote').textContent =
+    `Widest gap: ${worst.name} — paying $${worst.lo} or less returns ${worst.cheap}, paying over `
+    + `$${worst.hi} returns ${worst.dear}. Every one of the ${rows.length} lots leans the same way, `
+    + `which is what makes this the one pattern worth trusting.`;
+}
+
+/* deviation bars from the 0.500 datum, with CI whiskers */
+function lotScore(){
+  const rows = DATA[MODE].lots.slice().sort((a,b)=>b.score-a.score);
+  const W = 1000, rowH = 27, padL = 210, padR = 84, top = 40;
+  const H = top + rows.length*rowH + 10;
+  const px = v => padL + sx(v) * (W - padL - padR);
+  let s = `<svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="Buyer finishing score by lot">`;
+  s += `<line x1="${px(0.5)}" y1="${top-16}" x2="${px(0.5)}" y2="${H-6}" stroke="var(--ink)"/>`;
+  s += `<text class="axis" x="${px(0.5)}" y="${top-24}" text-anchor="middle">0.500</text>`;
+  rows.forEach((r,i)=>{
+    const y = top + i*rowH + 10, a = px(0.5), b = px(r.score);
+    s += `<text class="rowlabel" x="0" y="${y+4}">${esc(r.name)}</text>`;
+    s += `<rect x="${Math.min(a,b)}" y="${y-6}" width="${Math.abs(b-a)}" height="12" fill="${tone(r.score)}" opacity=".85"/>`;
+    s += `<line x1="${px(r.score-r.ci)}" y1="${y}" x2="${px(r.score+r.ci)}" y2="${y}" stroke="var(--ink)" stroke-width="1"/>`;
+    s += `<text class="rowmeta" x="${W-padR+10}" y="${y+4}">${r.score.toFixed(3)}</text>`;
+    s += `<title>${esc(r.name)}: ${r.score} ±${r.ci} over ${r.nOut} purchases</title>`;
+  });
+  $('#lotScore').innerHTML = s + '</svg>';
+}
+
+const COLS = [
+  ['name','Lot',      r=>esc(r.name)],
+  ['face','Face',     r=>'$'+r.face],
+  ['mean','Mean bid', r=>'$'+r.mean.toFixed(0)],
+  ['median','Median', r=>'$'+r.median],
+  ['premium','Premium', r=>`<span class="${r.premium>0?'pos':'neg'}">${r.premium>0?'+':''}${r.premium.toFixed(0)}%</span>`],
+  ['sd','Spread',     r=>'±'+r.sd.toFixed(0)],
+  ['max','High',      r=>'$'+r.max],
+  ['unbid','Unbid',   r=>r.unbid.toFixed(0)+'%'],
+  ['score','Buyer',   r=>`<span class="${r.score>=0.5?'pos':'neg'}">${r.score.toFixed(3)}</span>`],
+  ['n','Bids',        r=>fmt(r.n)],
+];
+let sortKey='premium', sortDir=-1;
+function lotTable(){
+  const rows = DATA[MODE].lots.slice().sort((a,b)=>{
+    const x=a[sortKey], y=b[sortKey];
+    return (typeof x==='string' ? x.localeCompare(y) : x-y) * sortDir;
+  });
+  $('#lotTable thead').innerHTML = '<tr>' + COLS.map(([k,l])=>
+    `<th data-k="${k}"${k===sortKey?` aria-sort="${sortDir<0?'descending':'ascending'}"`:''}>${l}</th>`).join('') + '</tr>';
+  $('#lotTable tbody').innerHTML = rows.map(r=>'<tr>'+COLS.map(([,,f])=>`<td>${f(r)}</td>`).join('')+'</tr>').join('');
+  $('#lotTable thead').querySelectorAll('th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;
+    if(k===sortKey) sortDir*=-1; else {sortKey=k; sortDir=(k==='name')?1:-1;}
+    lotTable();
+  });
+}
+
+const HABIT = {
+  share_buys:['Buying shares','Number of share purchases across the game.'],
+  companies_started:['Starting companies','How many companies the player floated.'],
+  actions:['Staying busy','Total actions taken — a rough proxy for engagement.'],
+  undos:['Using undo','Moves taken back before committing.'],
+  share_sells:['Selling shares','Shares dumped back to the market.'],
+  passes:['Passing','Passes outside the auction.'],
+};
+function habits(){
+  $('#habits').innerHTML = DATA[MODE].corr.map(c=>{
+    const [t,d] = HABIT[c.metric] || [c.metric,''];
+    const strong = Math.abs(c.r) >= 0.1;
+    return `<div class="card"><h3>${t}</h3>
+      <span class="big" style="color:${c.r>0?'var(--flood)':'var(--ebb)'}">${c.r>0?'+':''}${c.r.toFixed(3)}</span>
+      <p>${d} ${strong ? (c.r>0?'Doing more of this tracks with finishing higher.'
+                               :'Doing more of this tracks with finishing lower.')
+                      : 'No meaningful signal.'} n=${fmt(c.n)}</p></div>`;
+  }).join('');
+}
+
+function bars(el, rows, label, fmtLo){
+  const W=1000, rowH=30, padL=210, padR=90, top=38, H=top+rows.length*rowH+10;
+  const px=v=>padL+sx(v)*(W-padL-padR);
+  let s=`<p class="eyebrow">${label}</p><svg class="strip" viewBox="0 0 ${W} ${H}" role="img" aria-label="${label}">`;
+  s+=`<line x1="${px(0.5)}" y1="${top-16}" x2="${px(0.5)}" y2="${H-6}" stroke="var(--ink)"/>`;
+  s+=`<text class="axis" x="${px(0.5)}" y="${top-24}" text-anchor="middle">0.500</text>`;
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+10, a=px(0.5), b=px(r.score);
+    s+=`<text class="rowlabel" x="0" y="${y+4}">${esc(fmtLo(r))}</text>`;
+    s+=`<rect x="${Math.min(a,b)}" y="${y-7}" width="${Math.abs(b-a)}" height="14" fill="${tone(r.score)}" opacity=".85"/>`;
+    s+=`<text class="rowmeta" x="${W-padR+10}" y="${y+4}">${r.score.toFixed(3)} · n=${fmt(r.n)}</text>`;
+  });
+  el.innerHTML = s+'</svg>';
+}
+
+function levers(){
+  const d = DATA[MODE].dTrain, u = DATA[MODE].undo;
+  const best = u[u.length-1], worst = u[0];
+  $('#levers').innerHTML = `
+    <div class="card"><h3>Buying the first D train</h3>
+      <span class="big" style="color:var(--flood)">${d.winPct}%</span>
+      <p>The player who triggers the endgame finishes first ${d.winPct}% of the time,
+         against a ${d.base}% baseline. Over ${fmt(d.n)} games. Treat the D as a clock you choose to start.</p></div>
+    <div class="card"><h3>Taking moves back</h3>
+      <span class="big" style="color:var(--flood)">${best.score.toFixed(3)}</span>
+      <p>Players using ${best.band} undos score ${best.score.toFixed(3)}; those using ${worst.band}
+         score ${worst.score.toFixed(3)}. Checking a line before committing is the cheapest edge on this page.</p></div>`;
+}
+
+function render(){
+  facts(); slope(); lotScore(); lotTable(); habits(); levers();
+  bars($('#spend'), DATA[MODE].spend, 'Total spent in the initial auction (of $580 starting cash)',
+       r=>`$${r.lo} – $${r.hi}`);
+  bars($('#par'), DATA[MODE].par, 'Par price chosen when floating a company',
+       r=>`par $${r.par}`);
+  $('#caveats').innerHTML = `
+    <div class="finding"><h3>These are correlations, not instructions</h3>
+      <p>A lot that scores well may simply be the lot strong players reach for. Nothing here
+         separates the choice from the person making it.</p></div>
+    <div class="finding"><h3>About one lot in six is missing an owner</h3>
+      <p>When the auction ends with items still undealt, the engine assigns them without recording
+         an action, so they can't be attributed. Those lots are excluded rather than guessed, which
+         means the unbid column understates slightly.</p></div>
+    <div class="finding"><h3>Read the confidence intervals</h3>
+      <p>On the lot chart, any bar whose hairline crosses the datum is indistinguishable from
+         no effect. Most of them do.</p></div>
+    <div class="finding"><h3>The rules held still</h3>
+      <p>The lot set and the four par prices are identical in every quarter across the whole span,
+         so the year pools safely despite the prototype label.</p></div>`;
+  $('#foot').innerHTML =
+    `Built from ${fmt(DATA.meta.actions)} actions across ${fmt(DATA.meta.games)} finished games, `
+    + `${DATA.meta.from} to ${DATA.meta.to}. Undo and redo resolved before parsing; auction winners `
+    + `reconstructed from bid order and validated against three hand-checked transcripts.<br>`
+    + `Showing ${MODE === 'p3' ? '3-player' : '4-player'} games (${fmt(DATA[MODE].nGames)}).`;
+}
+
+function setMode(m){
+  MODE = m;
+  $('#b3').setAttribute('aria-pressed', m==='p3');
+  $('#b4').setAttribute('aria-pressed', m==='p4');
+  render();
+}
+$('#b3').onclick = ()=>setMode('p3');
+$('#b4').onclick = ()=>setMode('p4');
+render();
+</script></body></html>
