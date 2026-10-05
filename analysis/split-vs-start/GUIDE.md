@@ -13,7 +13,7 @@ Take it, unless one of these is true:
 | 3-player game | small, about +$40 | Six slots for three players. If you skip one, you'll likely get another chance. |
 | 4-player game | large, about +$200 | Six slots for four players. If you skip, a rival usually takes it. |
 
-The slot is worth most in phases 3+ and 4+, about +$200 to +$230, and when you're already ahead. If you pass, spend the action buying shares instead.
+The slot is worth most in phases 3+ and 4+, about +$180 to +$230, and when you're already ahead. If you pass, spend the action buying shares instead.
 
 ## Step 2. Which options can you actually take?
 
